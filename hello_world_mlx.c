@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/19 19:05:44 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/30 13:56:00 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/30 16:31:30 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,7 +44,7 @@ int     key_press(int keycode, t_params *mlx)
 
 int     mouse_press(int button, int x, int y, t_params *mlx)
 {
-    if (button == 1)
+   if (button == 1)
         mlx_pixel_put(mlx->ptr, mlx->win, x, y, 0x000000);
     return (1);
 }
