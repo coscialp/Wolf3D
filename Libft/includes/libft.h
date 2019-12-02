@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 14:37:20 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/23 19:14:02 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/02 14:38:46 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,10 @@
 # define TRUE 1
 # define FALSE 0
 # define STR_INT_MIN "-2147483648"
-# define BUFFER_SIZE 1
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 8
+# endif
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -61,10 +64,11 @@ int					ft_tolower(int c);
 */
 
 void				ft_strdel(char **ptr);
-void				ft_free_tab(char ***strs);
+void				ft_free_tab(char **strs);
 void				ft_putchar(char c);
 void				ft_putstr(const char *str);
 void				ft_putendl(char *str);
+void				ft_putstr_tab(char **tab);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(const char *str, int fd);
 void				ft_putendl_fd(char *str, int fd);

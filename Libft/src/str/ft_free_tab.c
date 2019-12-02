@@ -6,22 +6,19 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/23 19:10:18 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/23 19:15:23 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/02 14:51:21 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_tab(char ***strs)
+void	ft_free_tab(char **strs)
 {
 	size_t	i;
 
 	i = 0;
-	while (*strs[i++])
-	{
-		free(*strs[i]);
-		*strs[i] = NULL;
-	}
-	*strs = NULL;
+	while (strs[i])
+		free(strs[i++]);
+	free(strs);
 }

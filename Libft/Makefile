@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/10/25 18:12:55 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2019/11/27 14:54:28 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/12/02 14:25:14 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -67,7 +67,7 @@ SSRC_NAME = ft_putchar.c ft_putchar_fd.c\
 			ft_split.c get_next_line.c\
 			ft_strncpy.c ft_strchr.c ft_strndup.c\
 			ft_strlcat.c ft_strlcpy.c ft_strmapi.c ft_strtrim.c\
-			ft_strnlen.c ft_strrchr.c ft_strnstr.c ft_free_tab.c
+			ft_strnlen.c ft_strrchr.c ft_strnstr.c ft_free_tab.c ft_put_tab.c
 
 CINC_NAME = libft.h
 CSRC_NAME = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isspace.c ft_isprint.c\
