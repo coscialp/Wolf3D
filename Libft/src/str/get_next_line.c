@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/23 12:50:03 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/30 18:14:03 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/03 17:04:41 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,7 +23,7 @@ char				*next_line(char *str, char **line, size_t i, int *end)
 			i++;
 		if (str[i] == '\n')
 		{
-			*line = (i == 0) ? ft_strdup("") : ft_substr(str, 0, i);
+			*line = ft_substr(str, 0, i);
 			tmp = ft_strdup(str + i + 1);
 			ft_strcpy(str, tmp);
 			ft_strdel(&tmp);
@@ -31,13 +31,15 @@ char				*next_line(char *str, char **line, size_t i, int *end)
 		}
 		else
 		{
-			*line = (i == 0) ? ft_strdup("") : ft_substr(str, 0, i);
-			*end = 1;
+			*line = ft_substr(str, 0, i);
+			tmp = ft_strdup(str + i);
+			ft_strcpy(str, tmp);
+			ft_strdel(&tmp);
 			return (*line);
 		}
 	}
 	*end = 1;
-	return (ft_strdup(""));
+	return ("");
 }
 
 char				*read_line(char **str, char *buf, int fd)

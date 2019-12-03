@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/02 14:22:42 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/03 19:02:23 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,6 +28,7 @@
 
 typedef struct		s_data
 {
+	int				fd;
 	int				res_x;
 	int				res_y;
 	int				color_floor;
@@ -42,8 +43,13 @@ typedef struct		s_data
 
 typedef struct		s_map
 {
+	char			compass;
 	int				start_pos_x;
 	int				start_pos_y;
+	int				length;
+	int				height;
+	char			*map_1d;
+	char			**map_2d;
 }					t_map;
 
 /*
@@ -60,7 +66,7 @@ typedef struct		s_rgba
 	unsigned char	a;
 }					t_rgba;
 
-typedef union		s_color
+typedef union		u_color
 {
 	int				color;
 	t_rgba			rgba;
@@ -72,10 +78,14 @@ typedef union		s_color
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-int					parsing_core(int fd, t_data *data, t_map *map, t_color *color);
+int					parsing_core(t_data *data, t_map *map, t_color *color);
 int					parsing_texture(char *current_line, size_t i, t_data *data);
 int					parsing_resolution(char *line, t_data *data);
 int					parsing_color(char *line, t_color *color, t_data *data);
+int					map_dimension(t_map *map);
+int					read_map(int fd, t_map *map, char *current_line);
+int					parsing_map(t_map *map);
+int					check_map(t_map *map, int i, int j);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -85,6 +95,9 @@ int					parsing_color(char *line, t_color *color, t_data *data);
 
 int					msg_error(char *reason);
 int					ft_isargb(unsigned char color);
+int					ft_ismap(char c);
+int					ft_ispos(char pos);
+int					secu_initialize(char **map_1d, int fd);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -93,9 +106,8 @@ int					ft_isargb(unsigned char color);
 */
 
 void				ft_free_struct(t_data *data);
-t_data				*init_data(void);
+t_data				*init_data(int fd);
 t_map				*init_map(void);
 t_color				*init_color(void);
-
 
 #endif

@@ -6,19 +6,20 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:30:07 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/02 14:23:14 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/03 18:28:25 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_data		*init_data(void)
+t_data		*init_data(int fd)
 {
 	t_data	*data;
 
 	if (!(data = malloc(sizeof(t_data) * 1)))
 		return (NULL);
+	data->fd = fd;
 	data->res_x = 0;
 	data->res_y = 0;
 	data->color_floor = 0;
@@ -37,8 +38,13 @@ t_map		*init_map(void)
 
 	if (!(map = malloc(sizeof(t_map) * 1)))
 		return (NULL);
+	map->compass = 0;
 	map->start_pos_x = -1;
 	map->start_pos_y = -1;
+	map->length = 0;
+	map->height = 0;
+	map->map_1d = NULL;
+	map->map_2d = NULL;
 	return (map);
 }
 

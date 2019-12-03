@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_put_tab.c                                     .::    .:/ .      .::   */
+/*   ft_strisdigit.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/23 19:19:29 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/03 13:42:02 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/03 19:24:43 by coscialp     #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/03 19:33:24 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_tab(char **tab)
+int		ft_strisdigit(char *str)
 {
-	int i;
+	size_t	i;
 
 	i = 0;
-	if (!tab)
-		return ;
-	while (tab[i])
+	while (str[i])
 	{
-		ft_putendl(tab[i]);
+		if (!ft_isdigit(str[i]) && !ft_isspace(str[i]))
+			return (FALSE);
 		i++;
 	}
+	return (TRUE);
 }

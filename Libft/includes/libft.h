@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 14:37:20 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/02 14:38:46 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/03 19:27:04 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -75,6 +75,7 @@ void				ft_putendl_fd(char *str, int fd);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					get_next_line(int fd, char **line);
+int					ft_strisdigit(char *str);
 char				*ft_strtrim(const char *s1, const char *set);
 char			 	*ft_strcat(char *dest, const char *src);
 char				*ft_strjoin(const char *s1, const char *s2);
@@ -85,12 +86,14 @@ char				*ft_strrchr(const char *str, int c);
 char				*ft_strstr(const char *str, const char *to_find);
 char				*ft_strnstr(const char *str, const char *fnd, size_t size);
 char				**ft_split(const char *s, char c);
+char				**ft_split_line(const char *s);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(const char *s1, const char *s2);
 char				*ft_strfjoin(char *s1, char *s2, int free);
 char				*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 char				*ft_strtrim(const char *s1, const char *set);
 char				*ft_strdup(const char *str);
+char				*ft_strwcdup(char *src, char c);
 char				*ft_strndup(const char *s, size_t n);
 size_t				ft_strlen(const char *str);
 size_t				ft_strnlen(const char *str, size_t maxlen);

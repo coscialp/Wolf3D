@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_put_tab.c                                     .::    .:/ .      .::   */
+/*   ft_strwcdup.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/23 19:19:29 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/03 13:42:02 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/03 18:08:35 by coscialp     #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/03 18:17:27 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_tab(char **tab)
+char	*ft_strwcdup(char *src, char c)
 {
-	int i;
+	size_t	i;
+	size_t	j;
+	char	*dest;
 
 	i = 0;
-	if (!tab)
-		return ;
-	while (tab[i])
+	j = 0;
+	while (src[i])
 	{
-		ft_putendl(tab[i]);
+		if (src[i] == c)
+			j++;
 		i++;
 	}
+	if (!(dest = (char *)malloc(sizeof(char) * (i - j) + 1)))
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (src[i])
+	{
+		if (src[i] == c)
+			i++;
+		dest[j++] = src[i++];
+	}
+	dest[j] = 0;
+	return (dest);
 }
