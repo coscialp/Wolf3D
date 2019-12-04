@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 14:37:20 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/03 19:27:04 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/04 14:34:03 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -76,6 +76,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					get_next_line(int fd, char **line);
 int					ft_strisdigit(char *str);
+char				*ft_strrev(char *str);
 char				*ft_strtrim(const char *s1, const char *set);
 char			 	*ft_strcat(char *dest, const char *src);
 char				*ft_strjoin(const char *s1, const char *s2);

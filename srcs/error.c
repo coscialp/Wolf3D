@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:38:37 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/03 18:35:36 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/04 17:29:40 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,21 +49,23 @@ int		msg_error(char *reason)
 {
 	if (!ft_strcmp(reason, "open"))
 		ft_dprintf(2, "Error\nMap cannot be open!\n");
-	if (!ft_strcmp(reason, "read"))
+	else if (!ft_strcmp(reason, "read"))
 		ft_dprintf(2, "Error\nMap cannot be read!\n");
-	if (!ft_strcmp(reason, "malloc"))
+	else if (!ft_strcmp(reason, "texture"))
+		ft_dprintf(2, "Error\nMissing texture\n");
+	else if (!ft_strcmp(reason, "malloc"))
 		ft_dprintf(2, "Error\nMemory allocation failed!\n");
-	if (!ft_strcmp(reason, "resolution"))
-		ft_dprintf(2, "Error\nScreen's resolution are not valid!\n");
-	if (!ft_strcmp(reason, "file"))
+	else if (!ft_strcmp(reason, "resolution"))
+		ft_dprintf(2, "Error\nScreen's resolution is not valid!\n");
+	else if (!ft_strcmp(reason, "file"))
 		ft_dprintf(2, "Error\nNot valid file!\n");
-	if (!ft_strcmp(reason, "color"))
+	else if (!ft_strcmp(reason, "color"))
 		ft_dprintf(2, "Error\nNot valid color!\n");
-	if (!ft_strcmp(reason, "map"))
+	else if (!ft_strcmp(reason, "map"))
 		ft_dprintf(2, "Error\nNot valid map!\n");
-	if (!ft_strcmp(reason, "wall"))
-		ft_dprintf(2, "Error\nMap has borderless!\n");
-	if (!ft_strcmp(reason, "player"))
+	else if (!ft_strcmp(reason, "wall"))
+		ft_dprintf(2, "Error\nMap is borderless!\n");
+	else if (!ft_strcmp(reason, "player"))
 		ft_dprintf(2, "Error\nPlayer can't be multiple position\n");
 	return (-1);
 }

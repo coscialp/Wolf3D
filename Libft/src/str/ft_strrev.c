@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strcmp.c                                      .::    .:/ .      .::   */
+/*   ft_strrev.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/16 16:53:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/04 14:44:29 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/04 14:32:27 by coscialp     #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/04 14:33:36 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+char		*ft_strrev(char *str)
 {
-	size_t	i;
+	int		i;
+	int		l;
+	char	t;
 
-	i = 0;
-	while (s1[i] || s2[i])
+	l = ft_strlen(str);
+	i = -1;
+	while (++i < --l)
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
+		t = str[i];
+		str[i] = str[l];
+		str[l] = t;
 	}
-	return (0);
+	return (str);
 }

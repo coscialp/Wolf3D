@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:30:07 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/03 18:28:25 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/04 17:27:33 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,10 +20,10 @@ t_data		*init_data(int fd)
 	if (!(data = malloc(sizeof(t_data) * 1)))
 		return (NULL);
 	data->fd = fd;
-	data->res_x = 0;
-	data->res_y = 0;
-	data->color_floor = 0;
-	data->color_sky = 0;
+	data->res_x = -1;
+	data->res_y = -1;
+	data->color_floor = -1;
+	data->color_sky = -1;
 	data->north_texture = NULL;
 	data->south_texture = NULL;
 	data->west_texture = NULL;
@@ -48,12 +48,15 @@ t_map		*init_map(void)
 	return (map);
 }
 
-t_color		*init_color(void)
+t_color		*init_color(t_data *data, t_map *map)
 {
 	t_color		*color;
 
 	if (!(color = (t_color*)malloc(sizeof(t_color) * 1)))
-		return (NULL);
+	{
+		msg_error("malloc");
+		ft_exit(data, map, color, 2);
+	}
 	color->color = 0;
 	color->rgba.a = 0;
 	color->rgba.b = 0;

@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/23 12:50:03 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/03 17:04:41 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/04 13:30:09 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,7 +39,7 @@ char				*next_line(char *str, char **line, size_t i, int *end)
 		}
 	}
 	*end = 1;
-	return ("");
+	return (NULL);
 }
 
 char				*read_line(char **str, char *buf, int fd)

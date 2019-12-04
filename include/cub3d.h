@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/03 19:02:23 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/04 17:28:45 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,7 +81,9 @@ typedef union		u_color
 int					parsing_core(t_data *data, t_map *map, t_color *color);
 int					parsing_texture(char *current_line, size_t i, t_data *data);
 int					parsing_resolution(char *line, t_data *data);
+int					parsing_analyser(char *line, t_data *data, t_map *map, t_color *color);
 int					parsing_color(char *line, t_color *color, t_data *data);
+int					parsing_name(char *name);
 int					map_dimension(t_map *map);
 int					read_map(int fd, t_map *map, char *current_line);
 int					parsing_map(t_map *map);
@@ -93,6 +95,7 @@ int					check_map(t_map *map, int i, int j);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
+void				ft_exit(t_data *data, t_map *map, t_color *color, int f);
 int					msg_error(char *reason);
 int					ft_isargb(unsigned char color);
 int					ft_ismap(char c);
@@ -108,6 +111,6 @@ int					secu_initialize(char **map_1d, int fd);
 void				ft_free_struct(t_data *data);
 t_data				*init_data(int fd);
 t_map				*init_map(void);
-t_color				*init_color(void);
+t_color				*init_color(t_data *data, t_map *map);
 
 #endif
