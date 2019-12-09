@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/04 17:28:45 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 12:07:42 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -88,6 +88,8 @@ int					map_dimension(t_map *map);
 int					read_map(int fd, t_map *map, char *current_line);
 int					parsing_map(t_map *map);
 int					check_map(t_map *map, int i, int j);
+int					texture_is_valid(char *path);
+
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/04 14:17:51 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/04 17:34:05 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 12:10:03 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,8 +42,9 @@ int		parsing_end(t_data *data, t_map *map)
 		return (msg_error("color"));
 	if (data->res_x == -1 || data->res_y == -1)
 		return (msg_error("resolution"));
-	if (!data->east_texture || !data->west_texture || !data->south_texture ||
-	!data->north_texture || !data->sprite_texture)
+	if (!texture_is_valid(data->east_texture) || !texture_is_valid(data->west_texture) ||
+	!texture_is_valid(data->south_texture) || !texture_is_valid(data->north_texture)||
+	!texture_is_valid(data->sprite_texture))
 		return (msg_error("texture"));
 	if (map->start_pos_x == -1 || map->start_pos_y == -1 || !map->compass)
 		return (msg_error("player"));
