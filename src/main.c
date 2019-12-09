@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 16:30:50 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 17:33:40 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,6 +73,11 @@ int		main(int ac, char **av)
 		color = init_color(data, map);
 		if (parsing_core(data, map, color) == -1)
 			ft_exit(data, map, color, 3);
+		ft_dprintf(1, "res_x:\t%d\nres_y:\t%d\n", data->res_x, data->res_y);
+		ft_dprintf(1, "south_texture:\t|%s|\nnorth_texture:\t|%s|\nwest_texture:\t|%s|\neast_texture:\t|%s|\nsprite_texture:\t|%s|\n", data->south_texture, data->north_texture, data->west_texture, data->east_texture, data->sprite_texture);
+		ft_dprintf(1, "color_floor:\t%d\ncolor_sky:\t%d\n", data->color_floor, data->color_sky);
+		ft_putstr_tab(map->map_2d);
+		ft_dprintf(1, "pos_x:\t\t%d\npos_y:\t\t%d\ncompass:\t%c\n", map->start_pos_x, map->start_pos_y, map->compass);
 	}
 	ft_exit_sucess(data, map, color);
 }
