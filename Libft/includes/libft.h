@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 14:37:20 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/04 14:34:03 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/05 17:31:15 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -72,10 +72,11 @@ void				ft_putstr_tab(char **tab);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(const char *str, int fd);
 void				ft_putendl_fd(char *str, int fd);
+void				ft_whilestris(char *str, int *i, int (*f)(int), char neg);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					get_next_line(int fd, char **line);
-int					ft_strisdigit(char *str);
+int					ft_stris(char *str, int (*f)(int));
 char				*ft_strrev(char *str);
 char				*ft_strtrim(const char *s1, const char *set);
 char			 	*ft_strcat(char *dest, const char *src);
@@ -121,16 +122,17 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
+void				ft_memdel(void **ptr);
+void				ft_bzero(void *s, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memset(void *s, int c, size_t n);
-void				ft_bzero(void *s, size_t n);
 void				*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				*ft_memmove(void *dest, const void *src, size_t n);
-void				ft_memdel(void **ptr);
 void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_calloc(size_t nb, size_t size);
 void				*ft_memalloc(size_t size);
+void				*ft_realloc(void *ptr, size_t size);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

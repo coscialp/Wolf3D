@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/19 19:05:44 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/02 13:44:13 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/05 18:46:41 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,10 +24,17 @@
 # define KEY_A 0
 # define KEY_D 2
 
+typedef struct s_tex
+{
+    void   *img;
+    char	*data;
+}               t_tex;
+
 typedef struct s_params
 {
     void          *ptr;
     void          *win;
+    t_tex         tex[1];
     size_t        x;
     size_t        y;
 }               t_params;
@@ -66,16 +73,20 @@ int main(void)
         return (0);
     if ((mlx->win = mlx_new_window(mlx->ptr, 1280, 720, "Hello world!")) == NULL)
         return (0);
-    while (mlx->x < 1280)
-    {
-       mlx-> y = 0;
-        while (mlx->y < 720)
-        {
-            mlx_pixel_put(mlx->ptr, mlx->win, mlx->x, mlx->y, 0xFFFFFF);
-            mlx->y++;
-        }
-        mlx->x++;
-    }
+    // while (mlx->x < 1280)
+    // {
+    //    mlx-> y = 0;
+    //     while (mlx->y < 720)
+    //     {
+    //         mlx_pixel_put(mlx->ptr, mlx->win, mlx->x, mlx->y, 0xFFFFFF);
+    //         mlx->y++;
+    //     }
+    //     mlx->x++;
+    // }
+    int a = 64;
+    int b = 64;
+    mlx->tex[0].img = mlx_xpm_file_to_image(mlx->ptr, "../texture/stone.xpm", &a, &b);
+    mlx->tex[0].data = mlx_get_data_addr(mlx->tex[0].img, &mlx->tex[0].bpp,
     mlx_string_put(mlx->ptr, mlx->win, 600, 600, 0x000000, "HELLO WORLD!");
     mlx_key_hook(mlx->win, key_press, mlx);
     mlx_mouse_hook(mlx->win, mouse_press, mlx);

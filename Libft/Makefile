@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/10/25 18:12:55 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2019/12/04 14:34:17 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/12/05 18:03:01 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -67,8 +67,8 @@ SSRC_NAME = ft_putchar.c ft_putchar_fd.c\
 			ft_split.c get_next_line.c\
 			ft_strncpy.c ft_strchr.c ft_strndup.c\
 			ft_strlcat.c ft_strlcpy.c ft_strmapi.c ft_strtrim.c\
-			ft_strnlen.c ft_strrchr.c ft_strnstr.c ft_free_tab.c ft_put_tab.c\
-			ft_split_line.c ft_strwcdup.c ft_strisdigit.c ft_strrev.c
+			ft_strnlen.c ft_strrchr.c ft_strnstr.c ft_free_tab.c ft_putstr_tab.c\
+			ft_split_line.c ft_strwcdup.c ft_stris.c ft_strrev.c ft_whilestris.c
 
 CINC_NAME = libft.h
 CSRC_NAME = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isspace.c ft_isprint.c\
@@ -79,7 +79,7 @@ ISRC_NAME = ft_atoi.c ft_putnbr_fd.c ft_putnbr_base.c ft_itoa.c ft_itoa_base.c f
 
 MINC_NAME = libft.h
 MSRC_NAME = ft_memset.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c\
-			ft_memmove.c ft_calloc.c ft_bzero.c ft_memdel.c
+			ft_memmove.c ft_calloc.c ft_bzero.c ft_memdel.c ft_realloc.c
 
 LINC_NAME = libft.h
 LSRC_NAME = ft_lstadd_back.c ft_lstadd_front.c ft_lstnew.c ft_lstiter.c\
@@ -177,7 +177,24 @@ $(SFOBJ_PATH)%.o: $(SFSRC_PATH)%.c $(SFINC)
 	@printf "\033[2K\r$(PINK)Compiling...	\033[37m$<\033[36m \033[0m"
 
 clean:
+	@printf "\33[2K\r$(PINK)Deleting	\033[37m"
+	@sleep 0.25
+	@printf "\33[2K\r$(PINK)Deleting.	\033[37m"
+	@sleep 0.25
+	@printf "\33[2K\r$(PINK)Deleting..	\033[37m"
+	@sleep 0.25
+	@printf "\33[2K\r$(PINK)Deleting...	\033[37m"
+	@sleep 0.25
+	@printf "\33[2K\r$(PINK)Deleting	\033[37m"
+	@sleep 0.25
+	@printf "\33[2K\r$(PINK)Deleting.	\033[37m"
+	@sleep 0.25
+	@printf "\33[2K\r$(PINK)Deleting..	\033[37m"
+	@sleep 0.25
+	@printf "\33[2K\r$(PINK)Deleting...	\033[37m"
+	@sleep 0.25
 	@rm -rf $(OBJ_PATH)
+	@printf "\33[2K\r$(LIGHT_GREEN)Successfully!\033[0m"
 
 fclean: clean
 	@rm -rf $(NAME)
