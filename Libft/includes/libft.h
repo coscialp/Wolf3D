@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 14:37:20 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/05 17:31:15 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 15:33:21 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,7 +56,6 @@ int					ft_isupper(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 
-
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 **┃                            Function : String                              ┃
@@ -79,7 +78,7 @@ int					get_next_line(int fd, char **line);
 int					ft_stris(char *str, int (*f)(int));
 char				*ft_strrev(char *str);
 char				*ft_strtrim(const char *s1, const char *set);
-char			 	*ft_strcat(char *dest, const char *src);
+char				*ft_strcat(char *dest, const char *src);
 char				*ft_strjoin(const char *s1, const char *s2);
 char				*ft_strcpy(char *dest, const char *src);
 char				*ft_strncpy(char *dest, char *src, unsigned int n);

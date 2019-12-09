@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:31:43 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 12:08:49 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 16:31:39 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -97,9 +97,9 @@ int		texture_is_valid(char *path)
 	int		fd;
 	char	buf[BUFFER_SIZE];
 
-	if (open(path, fd) == -1)
+	if ((fd = open(path, O_RDONLY)) == -1)
 		return (0);
-	if (!read(fd, buf, 0))
+	if (read(fd, buf, 0) != 0)
 	{
 		close(fd);
 		return (0);

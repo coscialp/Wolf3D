@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/26 17:42:48 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/27 14:55:06 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 14:28:23 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,13 +19,13 @@
 # define SUCESS 1
 # define FAILURE -1
 
-typedef struct s_scanf
+typedef struct	s_scanf
 {
-	char	option;
-	char	end_arg;
-	char	*arg;
-	char	*current_arg;
-	size_t	return_size;
+	char		option;
+	char		end_arg;
+	char		*arg;
+	char		*current_arg;
+	size_t		return_size;
 }				t_scanf;
 
 int				ft_scanf(char *fmt, ...);

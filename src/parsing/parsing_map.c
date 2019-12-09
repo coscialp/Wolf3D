@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/03 19:00:10 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 13:02:24 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 16:32:22 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -96,7 +96,7 @@ int		map_dimension(t_map *map)
 	map->height = i;
 	i = 1;
 	while (map->map_2d[i + 1])
-		if (ft_strlen(map->map_2d[i++]) != map->length)
+		if (ft_strlen(map->map_2d[i++]) != (size_t)map->length)
 			return (msg_error("map"));
 	return (1);
 }

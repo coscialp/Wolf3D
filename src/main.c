@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/05 15:18:09 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 16:30:50 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,9 +53,9 @@ void	ft_exit(t_data *data, t_map *map, t_color *color, int f)
 int		main(int ac, char **av)
 {
 	int		fd;
-	t_data	*data;
-	t_map	*map;
-	t_color	*color;
+	t_data	*data = NULL;
+	t_map	*map = NULL;
+	t_color	*color = NULL;
 
 	if (ac == 2)
 	{

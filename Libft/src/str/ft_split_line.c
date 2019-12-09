@@ -6,26 +6,19 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/03 13:50:11 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/03 13:58:38 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 14:42:55 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int			char_in_string(char si, char c)
-{
-	if (si == c)
-		return (1);
-	return (0);
-}
-
 static char			*ft_copy(char *dest, char *src, char c)
 {
 	int i;
 
 	i = 0;
-	while (src[i] && char_in_string(src[i], c) == 0)
+	while (src[i] && src[i] != c)
 	{
 		dest[i] = src[i];
 		i++;
@@ -42,41 +35,49 @@ static int			ft_size(const char *str, char c)
 	word = 1;
 	while (str[i])
 	{
-		if (char_in_string(str[i], c) == 1)
+		if (str[i] == c)
 			word++;
 		i++;
 	}
 	return (word);
 }
 
+static int			ft_norme(char *str, char **split, int *i, char c)
+{
+	int	j;
+	int	k;
+
+	j = 0;
+	k = 0;
+	while (str[*i] && str[*i + j] != c)
+		j++;
+	if (!(split[k] = (char *)ft_calloc(sizeof(char), (j + 1))))
+		return (0);
+	ft_copy(split[(k)++], str + *i, c);
+	*i = *i + j;
+	return (1);
+}
+
 static int			ft_cpy_tab(char **split, char *str, char c)
 {
 	int i;
-	int j;
 	int k;
 
 	i = 0;
 	k = 0;
 	while (str[i])
 	{
-		if (char_in_string(str[i], c) == 1)
+		if (str[i] == c)
 			i++;
-		if (char_in_string(str[i], c) && char_in_string(str[i + 1], c))
+		if (str[i] == c && str[i + 1] == c)
 		{
-			if (!(split[k] = (char *)ft_calloc(sizeof(char), (j))))
+			if (!(split[k++] = (char *)ft_memalloc(sizeof(char))))
 				return (0);
-			k++;
 		}
 		else
 		{
-			j = 0;
-			while (str[i] && char_in_string(str[i + j], c) == 0)
-				j++;
-			if (!(split[k] = (char *)ft_calloc(sizeof(char), (j + 1))))
+			if (!ft_norme(str, split + k, &i, c))
 				return (0);
-			ft_copy(split[k], str + i, c);
-			i = i + j;
-			k++;
 		}
 	}
 	return (1);

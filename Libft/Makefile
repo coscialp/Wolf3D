@@ -6,12 +6,12 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/10/25 18:12:55 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2019/12/05 18:03:01 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/12/09 17:08:22 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
-.PHONY:			all clean fclean re bonus
+.PHONY:			all clean fclean re bonus git norm
 
 NAME	=		libft.a
 
@@ -20,10 +20,12 @@ LIGHT_PINK = \033[0;38;5;200m
 PINK = \033[0;38;5;198m
 DARK_BLUE = \033[1;38;5;110m
 GREEN = \033[1;32;111m
-LIGHT_GREEN = \033[1;38;5;121m
+LIGHT_GREEN = \033[0;38;5;121m
 LIGHT_RED = \033[0;38;5;110m
 FLASH_GREEN = \033[33;32m
 WHITE_BOLD = \033[37m
+GREY = \033[3;90m
+ORANGE = \033[3;91m
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃									PATH                                      ┃
@@ -79,7 +81,7 @@ ISRC_NAME = ft_atoi.c ft_putnbr_fd.c ft_putnbr_base.c ft_itoa.c ft_itoa_base.c f
 
 MINC_NAME = libft.h
 MSRC_NAME = ft_memset.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c\
-			ft_memmove.c ft_calloc.c ft_bzero.c ft_memdel.c ft_realloc.c
+			ft_memmove.c ft_calloc.c ft_bzero.c ft_memdel.c ft_realloc.c ft_memalloc.c
 
 LINC_NAME = libft.h
 LSRC_NAME = ft_lstadd_back.c ft_lstadd_front.c ft_lstnew.c ft_lstiter.c\
@@ -178,31 +180,58 @@ $(SFOBJ_PATH)%.o: $(SFSRC_PATH)%.c $(SFINC)
 
 clean:
 	@printf "\33[2K\r$(PINK)Deleting	\033[37m"
-	@sleep 0.25
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Deleting.	\033[37m"
-	@sleep 0.25
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Deleting..	\033[37m"
-	@sleep 0.25
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Deleting...	\033[37m"
-	@sleep 0.25
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Deleting	\033[37m"
-	@sleep 0.25
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Deleting.	\033[37m"
-	@sleep 0.25
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Deleting..	\033[37m"
-	@sleep 0.25
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Deleting...	\033[37m"
-	@sleep 0.25
+	@sleep 0.15
 	@rm -rf $(OBJ_PATH)
-	@printf "\33[2K\r$(LIGHT_GREEN)Successfully!\033[0m"
+	@printf "\33[2K\r$(GREY)Delete successfully!\n\033[0m"
 
 fclean: clean
 	@rm -rf $(NAME)
 
+muteclean:
+	@rm -rf $(OBJ_PATH)
+
+mutefclean: muteclean
+	@rm -rf $(NAME)
+
 re: fclean all
 
-dracaufeu :		$(SOBJ) $(IOBJ) $(LOBJ) $(MOBJ) $(POBJ)
-	@ar rcs $(NAME) $(SOBJ) $(IOBJ) $(LOBJ) $(MOBJ) $(POBJ)
+norme:
+	@norminette $(SRC_PATH) $(INC_PATH)
+
+continue: 
+	@while [ -z "$$CONTINUE" ]; do \
+		read -r -p "Press [y/N] to continue : " CONTINUE; \
+	done ; \
+	[ $$CONTINUE == "y" ] || [ $$CONTINUE == "Y" ] || (echo "Exiting."; exit 1;)
+
+git-%: mutefclean
+	@$(MAKE) norme
+	@$(MAKE) continue
+	@git add .
+	@git status | grep "	" | tr -d "	"
+	@$(MAKE) continue
+	@git commit -m "$(@:git-%=%)" 1> /dev/null
+	@printf "\33[2K\r$(GREY)Commit: $(@:git-%=%)\n\033[0m"
+	@git push origin master 2> /dev/null
+	@printf "\33[2K\r$(GREY)Push on github!\n\033[0m"
+
+
+dracaufeu :		$(SOBJ) $(IOBJ) $(LOBJ) $(MOBJ) $(POBJ) $(COBJ) $(SFOBJ)
+	@ar rcs $(NAME) $(SOBJ) $(IOBJ) $(LOBJ) $(MOBJ) $(POBJ) $(COBJ) $(SFOBJ)
 	@echo "$'[31m                                         @MnM                                                                                                         "
 	@echo "                                        @n++x                                                 W@W@                                                    "
 	@echo "                                       @n*;n@                                                 Mn+x@                                                   "
