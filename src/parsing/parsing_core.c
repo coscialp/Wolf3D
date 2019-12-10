@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/04 14:17:51 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 18:44:57 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 20:10:23 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,27 +53,27 @@ int		parsing_end(t_data *data, t_map *map)
 	return (1);
 }
 
-void	parsing_core(t_data *data, t_map *map, t_color *color)
+void	parsing_core(t_cub3d *c)
 {
 	char	*current_line;
 	size_t	i;
 
-	if (secu_initialize(&map->map_1d, data->fd) == -1)
-		ft_exit(data, map, color, 3);
-	while (get_next_line(data->fd, &current_line) > 0)
+	if (secu_initialize(&c->map->map_1d, c->data->fd) == -1)
+		ft_exit(c, 3);
+	while (get_next_line(c->data->fd, &current_line) > 0)
 	{
 		i = 0;
 		while (current_line[i] && ft_isspace(current_line[i]))
 			i++;
-		if (parsing_analyser(current_line + i, data, map, color) == -1)
+		if (parsing_analyser(current_line + i, c->data, c->map, c->color) == -1)
 		{
 			ft_strdel(&current_line);
-			ft_exit(data, map, color, 3);
+			ft_exit(c, 3);
 		}
 		ft_strdel(&current_line);
 	}
-	if ((parsing_map(map) == -1) || parsing_end(data, map) == -1)
-		ft_exit(data, map, color, 3);
+	if ((parsing_map(c->map) == -1) || parsing_end(c->data, c->map) == -1)
+		ft_exit(c, 3);
 }
 
 int		parsing_name(char *name)

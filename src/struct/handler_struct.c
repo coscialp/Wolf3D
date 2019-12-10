@@ -6,12 +6,28 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:30:07 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 18:43:43 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 20:14:42 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+t_cub3d		*init_cub3d(char *fd)
+{
+	t_cub3d		*c;
+
+	if (!(c = malloc(sizeof(t_cub3d) * 1)))
+	{
+		msg_error("malloc");
+		exit(EXIT_FAILURE);
+	}
+	c->color = NULL;
+	c->data = init_data(fd);
+	c->map = init_map(c);
+	c->color = init_color(c);
+	return (c);
+}
 
 t_data		*init_data(char *fd)
 {
@@ -22,8 +38,6 @@ t_data		*init_data(char *fd)
 		msg_error("malloc");
 		exit(EXIT_FAILURE);
 	}
-	if (!(data->ptrwin = mlx_init()))
-		exit(EXIT_FAILURE);
 	if (!(data->fd = open(fd, O_RDONLY)))
 	{
 		msg_error("open");
@@ -41,14 +55,14 @@ t_data		*init_data(char *fd)
 	return (data);
 }
 
-t_map		*init_map(t_data *data, t_color *color)
+t_map		*init_map(t_cub3d *c)
 {
 	t_map	*map;
 
 	if (!(map = malloc(sizeof(t_map) * 1)))
 	{
 		msg_error("malloc");
-		ft_exit(data, map, color, 1);
+		ft_exit(c, 1);
 	}
 	map->compass = 0;
 	map->start_pos_x = -1;
@@ -60,14 +74,14 @@ t_map		*init_map(t_data *data, t_color *color)
 	return (map);
 }
 
-t_color		*init_color(t_data *data, t_map *map)
+t_color		*init_color(t_cub3d *c)
 {
 	t_color		*color;
 
 	if (!(color = (t_color*)malloc(sizeof(t_color) * 1)))
 	{
 		msg_error("malloc");
-		ft_exit(data, map, color, 2);
+		ft_exit(c, 2);
 	}
 	color->color = 0;
 	color->rgba.a = 0;

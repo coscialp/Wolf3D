@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/12/09 15:43:33 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2019/12/10 18:53:12 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/12/10 19:43:33 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -100,7 +100,7 @@ MLXFLAG = -l mlx -framework OpenGL -framework AppKit -L minilibx minilibx/libmlx
 # ┃									RULES                                     ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-all : $(NAME) $(LIBFT) $(MLX)
+all : $(NAME)
 
 $(LIBFT):
 	@make -C libft/
@@ -108,7 +108,7 @@ $(LIBFT):
 $(MLX):
 	@make -C ./minilibx/ 2> /dev/null
 
-$(NAME): $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ)
+$(NAME): $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) $(LIBFT) $(MLX)
 	@gcc $(FLAG) $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) -o $(NAME) $(MLXFLAG) $(LIB_PATH)libft.a
 	@echo "	\033[2K\r$(DARK_BLUE)Cub3d:	$(LIGHT_GREEN)Updated\033[0m"
 
