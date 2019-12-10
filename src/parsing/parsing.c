@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:31:43 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 16:31:39 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 13:20:49 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,7 @@ static int		ft_strisdigit(char *str)
 	return (TRUE);
 }
 
-int		parsing_resolution(char *line, t_data *data)
+int				parsing_resolution(char *line, t_data *data)
 {
 	int		i;
 
@@ -46,7 +46,7 @@ int		parsing_resolution(char *line, t_data *data)
 	return (1);
 }
 
-int		parsing_color(char *line, t_color *color, t_data *data)
+int				parsing_color(char *line, t_color *color, t_data *data)
 {
 	char	**c;
 	int		i;
@@ -75,7 +75,7 @@ int		parsing_color(char *line, t_color *color, t_data *data)
 	return (1);
 }
 
-int		parsing_texture(char *line, size_t i, t_data *data)
+int				parsing_texture(char *line, size_t i, t_data *data)
 {
 	if (line[i] == 'R')
 		return (parsing_resolution(line + i + 1, data));
@@ -92,7 +92,7 @@ int		parsing_texture(char *line, size_t i, t_data *data)
 	return (1);
 }
 
-int		texture_is_valid(char *path)
+int				texture_is_valid(char *path)
 {
 	int		fd;
 	char	buf[BUFFER_SIZE];

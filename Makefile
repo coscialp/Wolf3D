@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/12/09 15:43:33 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2019/12/09 17:20:08 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/12/10 11:32:08 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -131,6 +131,7 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
+	@rm -rf cub3D.dSYM/
 
 re: fclean all
 

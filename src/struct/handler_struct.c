@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:30:07 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/04 17:27:33 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 13:37:41 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,12 +32,15 @@ t_data		*init_data(int fd)
 	return (data);
 }
 
-t_map		*init_map(void)
+t_map		*init_map(t_data *data, t_color *color)
 {
 	t_map	*map;
 
 	if (!(map = malloc(sizeof(t_map) * 1)))
-		return (NULL);
+	{
+		msg_error("malloc");
+		ft_exit(data, map, color, 1);
+	}
 	map->compass = 0;
 	map->start_pos_x = -1;
 	map->start_pos_y = -1;
