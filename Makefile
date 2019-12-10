@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/12/09 15:43:33 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2019/12/10 14:19:04 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/12/10 18:53:12 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -40,6 +40,9 @@ LIB_INC_PATH = libft/includes/
 PSRC_PATH = $(addprefix $(SRC_PATH), parsing/)
 POBJ_PATH = $(addprefix $(OBJ_PATH), parsing/)
 
+ESRC_PATH = $(addprefix $(SRC_PATH), error/)
+EOBJ_PATH = $(addprefix $(OBJ_PATH), error/)
+
 SSRC_PATH = $(addprefix $(SRC_PATH), struct/)
 SOBJ_PATH = $(addprefix $(OBJ_PATH), struct/)
 
@@ -53,19 +56,30 @@ MOBJ_PATH = $(OBJ_PATH)
 PINC_NAME = cub3d.h
 PSRC_NAME = parsing.c parsing_core.c parsing_map.c
 
+EINC_NAME = cub3d.h
+ESRC_NAME = error.c print.c exit.c
+
 SINC_NAME = cub3d.h
 SSRC_NAME = handler_struct.c
 
 MINC_NAME = cub3d.h
-MSRC_NAME = main.c error.c
+MSRC_NAME = main.c
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃									VAR                                       ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
+LIBFT = libft/libft.a
+
+MLX = minilibx/libmlx.a
+
 POBJ_NAME = $(PSRC_NAME:.c=.o)
 POBJ = $(addprefix $(POBJ_PATH), $(POBJ_NAME))
 PINC = $(addprefix $(INC_PATH), $(PINC_NAME))
+
+EOBJ_NAME = $(ESRC_NAME:.c=.o)
+EOBJ = $(addprefix $(EOBJ_PATH), $(EOBJ_NAME))
+EINC = $(addprefix $(INC_PATH), $(EINC_NAME))
 
 MOBJ_NAME = $(MSRC_NAME:.c=.o)
 MOBJ = $(addprefix $(MOBJ_PATH), $(MOBJ_NAME))
@@ -80,33 +94,42 @@ SINC = $(addprefix $(INC_PATH), $(SINC_NAME))
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 FLAGS = -Wall -Werror -Wextra -O3 -g3 #-fsanitize=address#-fsanitize=undefined
-MLXFLAG = -l mlx -framework OpenGL -framework AppKit -L minilibx minilibx/libmlx.a -I minilibx
+MLXFLAG = -l mlx -framework OpenGL -framework AppKit -L minilibx minilibx/libmlx.a
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃									RULES                                     ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-all : $(NAME)
+all : $(NAME) $(LIBFT) $(MLX)
 
-$(NAME): $(SOBJ) $(MOBJ) $(POBJ)
-	@if test ! -f libft/libft.a; then $(MAKE) lib ; fi
-	@if test ! -f minilibx/libmlx.a; then make -C ./minilibx/ 2> /dev/null ; fi
-	@gcc $(FLAG) $(SOBJ) $(MOBJ) $(POBJ) -o $(NAME) $(MLXFLAG) $(LIB_PATH)libft.a
+$(LIBFT):
+	@make -C libft/
+
+$(MLX):
+	@make -C ./minilibx/ 2> /dev/null
+
+$(NAME): $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ)
+	@gcc $(FLAG) $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) -o $(NAME) $(MLXFLAG) $(LIB_PATH)libft.a
 	@echo "	\033[2K\r$(DARK_BLUE)Cub3d:	$(LIGHT_GREEN)Updated\033[0m"
 
 $(POBJ_PATH)%.o: $(PSRC_PATH)%.c $(PINC)
 	@if test ! -d $(dir $@); then mkdir -p $(dir $@); fi
-	@gcc $(FLAGS) -I $(INC_PATH) -I $(LIB_INC_PATH) -o $@ -c $<
+	@gcc $(FLAGS) -I $(INC_PATH) -I $(LIB_INC_PATH) -I minilibx -o $@ -c $<
+	@printf "\033[2K\r$(PINK)Compiling...	\033[37m$<\033[36m \033[0m"
+
+$(EOBJ_PATH)%.o: $(ESRC_PATH)%.c $(EINC)
+	@if test ! -d $(dir $@); then mkdir -p $(dir $@); fi
+	@gcc $(FLAGS) -I $(INC_PATH) -I $(LIB_INC_PATH) -I minilibx -o $@ -c $<
 	@printf "\033[2K\r$(PINK)Compiling...	\033[37m$<\033[36m \033[0m"
 
 $(MOBJ_PATH)%.o: $(MSRC_PATH)%.c $(MINC)
 	@if test ! -d $(dir $@); then mkdir -p $(dir $@); fi
-	@gcc $(FLAGS) -I $(INC_PATH) -I $(LIB_INC_PATH) -o $@ -c $<
+	@gcc $(FLAGS) -I $(INC_PATH) -I $(LIB_INC_PATH) -I minilibx -o $@ -c $<
 	@printf "\033[2K\r$(PINK)Compiling...	\033[37m$<\033[36m \033[0m"
 
 $(SOBJ_PATH)%.o: $(SSRC_PATH)%.c $(SINC)
 	@if test ! -d $(dir $@); then mkdir -p $(dir $@); fi
-	@gcc $(FLAGS) -I $(INC_PATH) -I $(LIB_INC_PATH) -o $@ -c $<
+	@gcc $(FLAGS) -I $(INC_PATH) -I $(LIB_INC_PATH) -I minilibx -o $@ -c $<
 	@printf "\033[2K\r$(PINK)Compiling...	\033[37m$<\033[36m \033[0m"
 
 clean:
@@ -142,7 +165,7 @@ mutefclean: muteclean
 	@rm -rf $(NAME)
 
 norme:
-	@norminette $(SRC_PATH) $(INC_PATH)
+	@norminette $(SRC_PATH) $(INC_PATH) $(LIB_PATH)/src $(LIB_PATH)/includes
 
 continue: 
 	@while [ -z "$$CONTINUE" ]; do \
@@ -176,9 +199,6 @@ git-%: mutefclean
 	@sleep 0.15
 	@git push origin master 2> /dev/null
 	@printf "\33[2K\r$(GREY)Pushed on github!\n\033[0m"
-
-lib:
-	@make -C libft/
 
 libclean:
 	@$(MAKE) clean

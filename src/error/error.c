@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:38:37 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/04 17:29:40 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 15:05:30 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,6 +49,8 @@ int		msg_error(char *reason)
 {
 	if (!ft_strcmp(reason, "open"))
 		ft_dprintf(2, "Error\nMap cannot be open!\n");
+	else if (!ft_strcmp(reason, "argument"))
+		ft_dprintf(2, "Error\nNumber of arguments are not valid!\n");
 	else if (!ft_strcmp(reason, "read"))
 		ft_dprintf(2, "Error\nMap cannot be read!\n");
 	else if (!ft_strcmp(reason, "texture"))

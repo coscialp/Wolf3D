@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/23 15:42:26 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/23 15:43:20 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 18:53:45 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,4 +40,9 @@ char	*ft_u_converter(unsigned int nb)
 
 	base = "0123456789";
 	return (ft_itoa_u_base((nb), base));
+}
+
+char	*ft_f_converter(double nb)
+{
+	return (ft_ftoa(nb, 5));
 }

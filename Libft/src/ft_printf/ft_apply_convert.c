@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/12 09:23:17 by tclaudel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/23 14:38:27 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 16:52:55 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,6 +42,8 @@ char			*ft_apply_convert(t_printf *pf, va_list ap)
 		tmp = ft_upx_converter(va_arg(ap, unsigned int));
 	else if (pf->option == 'x')
 		tmp = ft_x_converter(va_arg(ap, unsigned int));
+	else if (pf->option == 'f')
+		tmp = ft_f_converter(va_arg(ap, double));
 	else if (pf->option == '%')
 		tmp = ft_pourcent_converter();
 	else

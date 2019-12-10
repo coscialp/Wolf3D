@@ -6,20 +6,29 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:30:07 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 13:37:41 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 18:43:43 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_data		*init_data(int fd)
+t_data		*init_data(char *fd)
 {
 	t_data	*data;
 
 	if (!(data = malloc(sizeof(t_data) * 1)))
-		return (NULL);
-	data->fd = fd;
+	{
+		msg_error("malloc");
+		exit(EXIT_FAILURE);
+	}
+	if (!(data->ptrwin = mlx_init()))
+		exit(EXIT_FAILURE);
+	if (!(data->fd = open(fd, O_RDONLY)))
+	{
+		msg_error("open");
+		exit(EXIT_FAILURE);
+	}
 	data->res_x = -1;
 	data->res_y = -1;
 	data->color_floor = -1;
@@ -75,4 +84,5 @@ void		ft_free_struct(t_data *data)
 	ft_strdel(&data->south_texture);
 	ft_strdel(&data->west_texture);
 	ft_strdel(&data->east_texture);
+	free(data);
 }

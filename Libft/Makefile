@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/10/25 18:12:55 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2019/12/09 17:08:22 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/12/10 16:44:06 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -77,7 +77,8 @@ CSRC_NAME = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isspace.c ft_isprint.c\
 			ft_islower.c ft_isupper.c ft_isdigit.c
 
 IINC_NAME = libft.h
-ISRC_NAME = ft_atoi.c ft_putnbr_fd.c ft_putnbr_base.c ft_itoa.c ft_itoa_base.c ft_itoa_ll_base.c ft_itoa_u_base.c
+ISRC_NAME = ft_atoi.c ft_putnbr_fd.c ft_putnbr_base.c ft_itoa.c ft_itoa_base.c ft_itoa_ll_base.c\
+			ft_itoa_u_base.c ft_ftoa.c
 
 MINC_NAME = libft.h
 MSRC_NAME = ft_memset.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c\

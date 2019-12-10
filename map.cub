@@ -1,4 +1,4 @@
-R 1920 1080
+R 2560 1440
 
 NO ./texture/stone.xpm
 SO ./texture/stone.xpm
@@ -6,7 +6,7 @@ WE ./texture/stone.xpm
 EA ./texture/stone.xpm
 S ./texture/stone.xpm
 
-F 0,0,255 4
+F 0,0,255
 C 225,30,0
 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1

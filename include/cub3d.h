@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 13:37:53 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 18:45:20 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,6 +16,7 @@
 
 # include "libft.h"
 # include "libftprintf.h"
+# include "mlx.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -28,6 +29,8 @@
 
 typedef struct	s_data
 {
+	void			*ptrwin;
+	void			*win;
 	int				fd;
 	int				res_x;
 	int				res_y;
@@ -38,6 +41,7 @@ typedef struct	s_data
 	char			*west_texture;
 	char			*east_texture;
 	char			*sprite_texture;
+
 }				t_data;
 
 typedef struct	s_map
@@ -77,7 +81,7 @@ typedef union	u_color
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-int				parsing_core(t_data *data, t_map *map, t_color *color);
+void			parsing_core(t_data *data, t_map *map, t_color *color);
 int				parsing_texture(char *current_line, size_t i, t_data *data);
 int				parsing_resolution(char *line, t_data *data);
 int				parsing_analyser(char *line, t_data *data, t_map *map,
@@ -97,6 +101,8 @@ int				texture_is_valid(char *path);
 */
 
 void			ft_exit(t_data *data, t_map *map, t_color *color, int f);
+void			print_params(t_data *data, t_map *map);
+void			ft_exit(t_data *data, t_map *map, t_color *color, int f);
 int				msg_error(char *reason);
 int				ft_isargb(unsigned char color);
 int				ft_ismap(char c);
@@ -110,7 +116,7 @@ int				secu_initialize(char **map_1d, int fd);
 */
 
 void			ft_free_struct(t_data *data);
-t_data			*init_data(int fd);
+t_data			*init_data(char *fd);
 t_map			*init_map(t_data *data, t_color *color);
 t_color			*init_color(t_data *data, t_map *map);
 

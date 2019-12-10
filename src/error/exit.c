@@ -1,56 +1,41 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_is.c                                          .::    .:/ .      .::   */
+/*   exit.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/23 15:46:28 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 16:54:07 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/10 18:32:44 by coscialp     #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/10 18:44:03 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "cub3d.h"
 
-int		ft_is_pourcent(char c)
+void	ft_exit(t_data *data, t_map *map, t_color *color, int f)
 {
-	return (c == '%');
-}
-
-int		ft_is_option(char c)
-{
-	char	*options;
-	int		i;
-
-	i = 0;
-	options = "cspdiuxXf%";
-	while (options[i])
+	close(data->fd);
+	if (f == 1)
 	{
-		if (options[i] == c)
-			return (1);
-		i++;
+		ft_free_struct(data);
 	}
-	return (0);
-}
-
-int		ft_is_in_flags(char c, t_printf *pf)
-{
-	return (ft_strchr(pf->flags, c) != 0);
-}
-
-int		ft_is_flag(char c)
-{
-	char	*flags;
-	int		i;
-
-	i = 0;
-	flags = "-0.*";
-	while (flags[i])
+	if (f == 2)
 	{
-		if (flags[i] == c)
-			return (1);
-		i++;
+		ft_free_struct(data);
+		ft_strdel(&map->map_1d);
+		if (map->map_2d)
+			ft_free_tab(map->map_2d);
+		free(map);
 	}
-	return (0);
+	if (f == 3)
+	{
+		ft_free_struct(data);
+		ft_strdel(&map->map_1d);
+		if (map->map_2d)
+			ft_free_tab(map->map_2d);
+		free(map);
+		free(color);
+	}
+	exit(EXIT_FAILURE);
 }

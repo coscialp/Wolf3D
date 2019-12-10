@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:31:43 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 14:14:11 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 15:19:15 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,6 +43,10 @@ int				parsing_resolution(char *line, t_data *data)
 		return (msg_error("resolution"));
 	if (data->res_x <= 0 || data->res_y <= 0)
 		return (msg_error("resolution"));
+	if (data->res_y > 1440)
+		data->res_y = 1440;
+	if (data->res_x > 2560)
+		data->res_x = 2560;
 	return (1);
 }
 

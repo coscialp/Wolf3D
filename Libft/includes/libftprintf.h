@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/28 10:06:37 by tclaudel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/23 15:55:46 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 17:45:43 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,6 +37,7 @@ char			*ft_strjoin_zero(char *s1, char *s2);
 char			*ft_c_converter(int nb, t_printf *pf);
 char			*ft_d_converter(int nb, t_printf *pf);
 char			*ft_s_converter(char *str, size_t width, char *flags);
+char			*ft_f_converter(double nb);
 char			*ft_p_converter(long long address, t_printf *pf);
 char			*ft_u_converter(unsigned int nb);
 char			*ft_x_converter(unsigned int nb);
