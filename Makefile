@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/12/09 15:43:33 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2019/12/10 14:17:59 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/12/10 14:18:35 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -160,21 +160,21 @@ git-%: mutefclean
 	@printf "\33[2K\r$(GREY)Commit: $(@:git-%=%)\n\033[0m"
 	@git push origin master 2> /dev/null
 	@printf "\33[2K\r$(PINK)Pushing master	\033[37m"
-	@sleep 0.1
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Pushing master.	\033[37m"
-	@sleep 0.1
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Pushing master..	\033[37m"
-	@sleep 0.1
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Pushing master...	\033[37m"
-	@sleep 0.1
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Pushing master	\033[37m"
-	@sleep 0.1
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Pushing master.	\033[37m"
-	@sleep 0.1
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Pushing master..	\033[37m"
-	@sleep 0.1
+	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Pushing master...	\033[37m"
-	@sleep 0.1
+	@sleep 0.15
 	@printf "\33[2K\r$(GREY)Pushed on github!\n\033[0m"
 
 lib:
