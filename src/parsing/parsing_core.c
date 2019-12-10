@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/04 14:17:51 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 13:43:54 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 14:04:57 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,7 +66,10 @@ int		parsing_core(t_data *data, t_map *map, t_color *color)
 		while (current_line[i] && ft_isspace(current_line[i]))
 			i++;
 		if (parsing_analyser(current_line + i, data, map, color) == -1)
+		{
+			ft_strdel(&current_line);
 			return (-1);
+		}
 		ft_strdel(&current_line);
 	}
 	if ((parsing_map(map) == -1) || parsing_end(data, map) == -1)

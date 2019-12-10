@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 13:54:54 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 14:09:03 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,6 +20,8 @@ void	ft_exit_sucess(t_data *data, t_map *map, t_color *color)
 	ft_free_tab(map->map_2d);
 	free(map);
 	free(color);
+	while (1)
+		;
 	exit(EXIT_SUCCESS);
 }
 
@@ -34,6 +36,7 @@ void	ft_exit(t_data *data, t_map *map, t_color *color, int f)
 	{
 		ft_free_struct(data);
 		free(data);
+		ft_strdel(&map->map_1d);
 		if (map->map_2d)
 			ft_free_tab(map->map_2d);
 		free(map);
@@ -42,11 +45,14 @@ void	ft_exit(t_data *data, t_map *map, t_color *color, int f)
 	{
 		ft_free_struct(data);
 		free(data);
+		ft_strdel(&map->map_1d);
 		if (map->map_2d)
 			ft_free_tab(map->map_2d);
 		free(map);
 		free(color);
 	}
+	while (1)
+		;
 	exit(EXIT_FAILURE);
 }
 

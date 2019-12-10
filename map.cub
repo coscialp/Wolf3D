@@ -6,7 +6,7 @@ WE ./texture/stone.xpm
 EA ./texture/stone.xpm
 S ./texture/stone.xpm
 
-F 0,0,255
+F 0,0,255 4
 C 225,30,0
 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1

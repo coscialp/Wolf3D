@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:31:43 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 13:20:49 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 14:14:11 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -63,7 +63,7 @@ int				parsing_color(char *line, t_color *color, t_data *data)
 		ft_whilestris(c[j], &i, ft_isspace, 0);
 		if (!ft_strisdigit(c[j]) || !(ft_atoi(c[j]) >= 0 &&
 		ft_atoi(c[j]) <= 255) || c[j][i] || j >= 3)
-			return (0);
+			return (ft_free_tab(c));
 		j++;
 	}
 	color->rgba.r = ft_atoi(c[0]);
