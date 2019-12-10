@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/12/09 15:43:33 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2019/12/10 14:18:35 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/12/10 14:19:04 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -158,23 +158,23 @@ git-%: mutefclean
 	@$(MAKE) continue
 	@git commit -m "$(@:git-%=%)" 1> /dev/null
 	@printf "\33[2K\r$(GREY)Commit: $(@:git-%=%)\n\033[0m"
+	@printf "\33[2K\r$(PINK)Pushing master	\033[37m"
+	@sleep 0.15
+	@printf "\33[2K\r$(PINK)Pushing master.	\033[37m"
+	@sleep 0.15
+	@printf "\33[2K\r$(PINK)Pushing master..	\033[37m"
+	@sleep 0.15
+	@printf "\33[2K\r$(PINK)Pushing master...	\033[37m"
+	@sleep 0.15
+	@printf "\33[2K\r$(PINK)Pushing master	\033[37m"
+	@sleep 0.15
+	@printf "\33[2K\r$(PINK)Pushing master.	\033[37m"
+	@sleep 0.15
+	@printf "\33[2K\r$(PINK)Pushing master..	\033[37m"
+	@sleep 0.15
+	@printf "\33[2K\r$(PINK)Pushing master...	\033[37m"
+	@sleep 0.15
 	@git push origin master 2> /dev/null
-	@printf "\33[2K\r$(PINK)Pushing master	\033[37m"
-	@sleep 0.15
-	@printf "\33[2K\r$(PINK)Pushing master.	\033[37m"
-	@sleep 0.15
-	@printf "\33[2K\r$(PINK)Pushing master..	\033[37m"
-	@sleep 0.15
-	@printf "\33[2K\r$(PINK)Pushing master...	\033[37m"
-	@sleep 0.15
-	@printf "\33[2K\r$(PINK)Pushing master	\033[37m"
-	@sleep 0.15
-	@printf "\33[2K\r$(PINK)Pushing master.	\033[37m"
-	@sleep 0.15
-	@printf "\33[2K\r$(PINK)Pushing master..	\033[37m"
-	@sleep 0.15
-	@printf "\33[2K\r$(PINK)Pushing master...	\033[37m"
-	@sleep 0.15
 	@printf "\33[2K\r$(GREY)Pushed on github!\n\033[0m"
 
 lib:
