@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/12/09 15:43:33 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2019/12/11 11:26:37 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/12/11 11:28:07 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -23,7 +23,7 @@ GREEN = \033[1;32;111m
 LIGHT_GREEN = \033[0;38;5;121m
 LIGHT_RED = \033[0;38;5;110m
 FLASH_GREEN = \033[33;32m
-WHITE_BOLD = \033[37m
+WHITE = \033[0;37m
 GREY = \033[3;90m
 ORANGE = \033[3;91m
 
@@ -203,7 +203,7 @@ git-%: libmutefclean
 	@git status | grep "	" | tr -d "	"
 	@$(MAKE) continue
 	@git commit -m "$(@:git-%=%)" 1> /dev/null
-	@printf "\33[2K\r$(GREY)Commit: $(WHITE_BOLD)$(@:git-%=%)\n\033[0m"
+	@printf "\33[2K\r$(GREY)Commit: $(WHITE)$(@:git-%=%)\n\033[0m"
 	@printf "\33[2K\r$(PINK)Pushing master	\033[37m"
 	@sleep 0.15
 	@printf "\33[2K\r$(PINK)Pushing master.	\033[37m"
