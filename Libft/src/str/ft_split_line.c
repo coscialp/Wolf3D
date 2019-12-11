@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/03 13:50:11 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 17:32:37 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/11 11:21:59 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@ static char			*ft_copy(char *dest, char *src, char c)
 	int i;
 
 	i = 0;
-	while (src[i] && char_in_string(src[i], c) == 0)
+	while (src[i] && src[i] != c)
 	{
 		dest[i] = src[i];
 		i++;
@@ -42,30 +42,27 @@ static int			ft_size(const char *str, char c)
 	word = 1;
 	while (str[i])
 	{
-		if (char_in_string(str[i], c) == 1)
+		if (str[i] == c)
 			word++;
 		i++;
 	}
 	return (word);
 }
 
-static int			ft_cpy_tab(char **split, char *str, char c)
+static int			ft_cpy_tab(char **split, char *str, char c, int k)
 {
 	int i;
 	int j;
-	int k;
 
 	i = 0;
-	k = 0;
 	while (str[i])
 	{
-		if (char_in_string(str[i], c) == 1)
+		if (str[i] == c)
 			i++;
-		if (char_in_string(str[i], c) && char_in_string(str[i + 1], c))
+		if (str[i] == c && str[i + 1] == c)
 		{
 			if (!(split[k++] = (char *)ft_calloc(sizeof(char), (j))))
 				return (0);
-			k++;
 		}
 		else
 		{
@@ -74,9 +71,8 @@ static int			ft_cpy_tab(char **split, char *str, char c)
 				j++;
 			if (!(split[k] = (char *)ft_calloc(sizeof(char), (j + 1))))
 				return (0);
-			ft_copy(split[k], str + i, c);
+			ft_copy(split[k++], str + i, c);
 			i = i + j;
-			k++;
 		}
 	}
 	return (1);
@@ -94,11 +90,9 @@ char				**ft_split_line(const char *s)
 	str = (char *)s;
 	if (!(split = (char **)ft_calloc(sizeof(char *), (i + 1))))
 		return (NULL);
-	if (!(ft_cpy_tab(split, str, '\n')))
+	if (!(ft_cpy_tab(split, str, '\n', 0)))
 	{
-		while (split[k])
-			free(split[k++]);
-		free(split);
+		ft_free_tab(split);
 		return (NULL);
 	}
 	return (split);

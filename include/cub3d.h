@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 20:12:43 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/11 11:07:12 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,7 @@
 # define CUB3D_H
 
 # include "libft.h"
+# include "key.h"
 # include "libftprintf.h"
 # include "mlx.h"
 # include <sys/types.h>
@@ -132,5 +133,14 @@ t_cub3d			*init_cub3d(char *fd);
 t_data			*init_data(char *fd);
 t_map			*init_map(t_cub3d *c);
 t_color			*init_color(t_cub3d *c);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃								function events                               ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+int				key_press(int keycode, t_cub3d *c);
+void			ft_exit_sucess(t_cub3d *c);
 
 #endif

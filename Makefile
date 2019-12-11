@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/12/09 15:43:33 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2019/12/10 19:43:33 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/12/11 11:25:25 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -43,6 +43,9 @@ POBJ_PATH = $(addprefix $(OBJ_PATH), parsing/)
 ESRC_PATH = $(addprefix $(SRC_PATH), error/)
 EOBJ_PATH = $(addprefix $(OBJ_PATH), error/)
 
+EVSRC_PATH = $(addprefix $(SRC_PATH), events/)
+EVOBJ_PATH = $(addprefix $(OBJ_PATH), events/)
+
 SSRC_PATH = $(addprefix $(SRC_PATH), struct/)
 SOBJ_PATH = $(addprefix $(OBJ_PATH), struct/)
 
@@ -58,6 +61,9 @@ PSRC_NAME = parsing.c parsing_core.c parsing_map.c
 
 EINC_NAME = cub3d.h
 ESRC_NAME = error.c print.c exit.c
+
+EVINC_NAME = cub3d.h
+EVSRC_NAME = key_event.c
 
 SINC_NAME = cub3d.h
 SSRC_NAME = handler_struct.c
@@ -80,6 +86,10 @@ PINC = $(addprefix $(INC_PATH), $(PINC_NAME))
 EOBJ_NAME = $(ESRC_NAME:.c=.o)
 EOBJ = $(addprefix $(EOBJ_PATH), $(EOBJ_NAME))
 EINC = $(addprefix $(INC_PATH), $(EINC_NAME))
+
+EVOBJ_NAME = $(EVSRC_NAME:.c=.o)
+EVOBJ = $(addprefix $(EVOBJ_PATH), $(EVOBJ_NAME))
+EVINC = $(addprefix $(INC_PATH), $(EVINC_NAME))
 
 MOBJ_NAME = $(MSRC_NAME:.c=.o)
 MOBJ = $(addprefix $(MOBJ_PATH), $(MOBJ_NAME))
@@ -108,8 +118,8 @@ $(LIBFT):
 $(MLX):
 	@make -C ./minilibx/ 2> /dev/null
 
-$(NAME): $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) $(LIBFT) $(MLX)
-	@gcc $(FLAG) $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) -o $(NAME) $(MLXFLAG) $(LIB_PATH)libft.a
+$(NAME): $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) $(LIBFT) $(MLX) $(EVOBJ)
+	@gcc $(FLAG) $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) $(EVOBJ) -o $(NAME) $(MLXFLAG) $(LIB_PATH)libft.a
 	@echo "	\033[2K\r$(DARK_BLUE)Cub3d:	$(LIGHT_GREEN)Updated\033[0m"
 
 $(POBJ_PATH)%.o: $(PSRC_PATH)%.c $(PINC)
@@ -118,6 +128,11 @@ $(POBJ_PATH)%.o: $(PSRC_PATH)%.c $(PINC)
 	@printf "\033[2K\r$(PINK)Compiling...	\033[37m$<\033[36m \033[0m"
 
 $(EOBJ_PATH)%.o: $(ESRC_PATH)%.c $(EINC)
+	@if test ! -d $(dir $@); then mkdir -p $(dir $@); fi
+	@gcc $(FLAGS) -I $(INC_PATH) -I $(LIB_INC_PATH) -I minilibx -o $@ -c $<
+	@printf "\033[2K\r$(PINK)Compiling...	\033[37m$<\033[36m \033[0m"
+
+$(EVOBJ_PATH)%.o: $(EVSRC_PATH)%.c $(EVINC)
 	@if test ! -d $(dir $@); then mkdir -p $(dir $@); fi
 	@gcc $(FLAGS) -I $(INC_PATH) -I $(LIB_INC_PATH) -I minilibx -o $@ -c $<
 	@printf "\033[2K\r$(PINK)Compiling...	\033[37m$<\033[36m \033[0m"
@@ -164,6 +179,14 @@ muteclean:
 mutefclean: muteclean
 	@rm -rf $(NAME)
 
+libmuteclean:
+	@make -C libft/ muteclean
+	@rm -rf $(OBJ_PATH)
+
+libmutefclean: libmuteclean muteclean
+	@rm -rf $(LIBFT)
+	@rm -rf $(NAME)
+
 norme:
 	@norminette $(SRC_PATH) $(INC_PATH) $(LIB_PATH)/src $(LIB_PATH)/includes
 
@@ -173,7 +196,7 @@ continue:
 	done ; \
 	[ $$CONTINUE == "y" ] || [ $$CONTINUE == "Y" ] || (echo "Exiting."; exit 1;)
 
-git-%: mutefclean
+git-%: libmutefclean
 	@$(MAKE) norme
 	@$(MAKE) continue
 	@git add .
