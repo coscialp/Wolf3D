@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/11 11:00:38 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/11 11:10:13 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/11 11:43:01 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,6 +20,8 @@
 # define RIGHT 124
 # define ESC 53
 # define SPACE 49
+# define SHIFT 257
+# define CRL 256
 # define Q 113
 # define W 13
 # define E 101

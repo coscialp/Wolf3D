@@ -6,14 +6,14 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 14:36:53 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 14:11:36 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/11 15:07:39 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isdigit(int c)
+t_bool	ft_isdigit(int c)
 {
 	if (48 <= c && 57 >= c)
 		return (TRUE);

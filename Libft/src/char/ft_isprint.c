@@ -6,14 +6,14 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 15:04:13 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 14:11:36 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/11 15:08:39 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isprint(int c)
+t_bool	ft_isprint(int c)
 {
 	if (32 <= c && 126 >= c)
 		return (TRUE);

@@ -6,32 +6,32 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:38:37 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 15:05:30 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/11 15:35:33 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		ft_isargb(unsigned char color)
+t_bool	ft_isargb(unsigned char color)
 {
 	if (color < 0 || color > 255)
-		return (0);
-	return (1);
+		return (FALSE);
+	return (TRUE);
 }
 
-int		ft_ispos(char pos)
+t_bool	ft_ispos(char pos)
 {
 	if (pos == 'N' || pos == 'W' || pos == 'E' || pos == 'S')
-		return (1);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }
 
-int		ft_ismap(char c)
+t_bool	ft_ismap(char c)
 {
 	if (c == '1' || c == '0' || c == '2')
-		return (1);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }
 
 int		secu_initialize(char **map_1d, int fd)

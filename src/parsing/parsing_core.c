@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/04 14:17:51 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 20:21:42 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/11 19:09:24 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,7 +38,7 @@ int		parsing_analyser(char *line, t_data *data, t_map *map, t_color *color)
 
 int		parsing_end(t_data *data, t_map *map)
 {
-	if (data->color_floor == -1 || data->color_sky == -1)
+	if (data->color_floor == -1 || data->color_ceiling == -1)
 		return (msg_error("color"));
 	if (data->res_x == -1 || data->res_y == -1)
 		return (msg_error("resolution"));
@@ -50,6 +50,7 @@ int		parsing_end(t_data *data, t_map *map)
 		return (msg_error("texture"));
 	if (map->start_pos_x == -1 || map->start_pos_y == -1 || !map->compass)
 		return (msg_error("player"));
+	data->cam_height = data->res_y / 2;
 	return (1);
 }
 
@@ -58,21 +59,21 @@ void	parsing_core(t_cub3d *c)
 	char	*current_line;
 	size_t	i;
 
-	if (secu_initialize(&c->map->map_1d, c->data->fd) == -1)
+	if (secu_initialize(&MAP->map_1d, DATA->fd) == -1)
 		ft_exit(c, 3);
-	while (get_next_line(c->data->fd, &current_line) > 0)
+	while (get_next_line(DATA->fd, &current_line) > 0)
 	{
 		i = 0;
 		while (current_line[i] && ft_isspace(current_line[i]))
 			i++;
-		if (parsing_analyser(current_line + i, c->data, c->map, c->color) == -1)
+		if (parsing_analyser(current_line + i, DATA, MAP, COL) == -1)
 		{
 			ft_strdel(&current_line);
 			ft_exit(c, 3);
 		}
 		ft_strdel(&current_line);
 	}
-	if ((parsing_map(c->map) == -1) || parsing_end(c->data, c->map) == -1)
+	if ((parsing_map(c) == -1) || parsing_end(DATA, MAP) == -1)
 		ft_exit(c, 3);
 }
 

@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/12/09 15:43:33 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2019/12/11 11:28:07 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/12/11 18:15:26 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -43,6 +43,9 @@ POBJ_PATH = $(addprefix $(OBJ_PATH), parsing/)
 ESRC_PATH = $(addprefix $(SRC_PATH), error/)
 EOBJ_PATH = $(addprefix $(OBJ_PATH), error/)
 
+RSRC_PATH = $(addprefix $(SRC_PATH), raycasting/)
+ROBJ_PATH = $(addprefix $(OBJ_PATH), raycasting/)
+
 EVSRC_PATH = $(addprefix $(SRC_PATH), events/)
 EVOBJ_PATH = $(addprefix $(OBJ_PATH), events/)
 
@@ -63,7 +66,10 @@ EINC_NAME = cub3d.h
 ESRC_NAME = error.c print.c exit.c
 
 EVINC_NAME = cub3d.h
-EVSRC_NAME = key_event.c
+EVSRC_NAME = key_event.c other_event.c
+
+RINC_NAME = cub3d.h
+RSRC_NAME = raycast.c
 
 SINC_NAME = cub3d.h
 SSRC_NAME = handler_struct.c
@@ -86,6 +92,10 @@ PINC = $(addprefix $(INC_PATH), $(PINC_NAME))
 EOBJ_NAME = $(ESRC_NAME:.c=.o)
 EOBJ = $(addprefix $(EOBJ_PATH), $(EOBJ_NAME))
 EINC = $(addprefix $(INC_PATH), $(EINC_NAME))
+
+ROBJ_NAME = $(RSRC_NAME:.c=.o)
+ROBJ = $(addprefix $(ROBJ_PATH), $(ROBJ_NAME))
+RINC = $(addprefix $(INC_PATH), $(RINC_NAME))
 
 EVOBJ_NAME = $(EVSRC_NAME:.c=.o)
 EVOBJ = $(addprefix $(EVOBJ_PATH), $(EVOBJ_NAME))
@@ -118,14 +128,20 @@ $(LIBFT):
 $(MLX):
 	@make -C ./minilibx/ 2> /dev/null
 
-$(NAME): $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) $(LIBFT) $(MLX) $(EVOBJ)
-	@gcc $(FLAG) $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) $(EVOBJ) -o $(NAME) $(MLXFLAG) $(LIB_PATH)libft.a
+$(NAME): $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) $(LIBFT) $(MLX) $(EVOBJ) $(ROBJ)
+	@gcc $(FLAG) $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) $(EVOBJ) $(ROBJ) -o $(NAME) $(MLXFLAG) $(LIB_PATH)libft.a
 	@echo "	\033[2K\r$(DARK_BLUE)Cub3d:	$(LIGHT_GREEN)Updated\033[0m"
 
 $(POBJ_PATH)%.o: $(PSRC_PATH)%.c $(PINC)
 	@if test ! -d $(dir $@); then mkdir -p $(dir $@); fi
 	@gcc $(FLAGS) -I $(INC_PATH) -I $(LIB_INC_PATH) -I minilibx -o $@ -c $<
 	@printf "\033[2K\r$(PINK)Compiling...	\033[37m$<\033[36m \033[0m"
+
+$(ROBJ_PATH)%.o: $(RSRC_PATH)%.c $(RINC)
+	@if test ! -d $(dir $@); then mkdir -p $(dir $@); fi
+	@gcc $(FLAGS) -I $(INC_PATH) -I $(LIB_INC_PATH) -I minilibx -o $@ -c $<
+	@printf "\033[2K\r$(PINK)Compiling...	\033[37m$<\033[36m \033[0m"
+
 
 $(EOBJ_PATH)%.o: $(ESRC_PATH)%.c $(EINC)
 	@if test ! -d $(dir $@); then mkdir -p $(dir $@); fi

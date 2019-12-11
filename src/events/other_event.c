@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_isalpha.c                                     .::    .:/ .      .::   */
+/*   other_event.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/07 14:05:46 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/11 15:14:10 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/11 16:13:20 by coscialp     #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/11 16:13:37 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-t_bool	ft_isalpha(int c)
+int		close_prgm(t_cub3d *c)
 {
-	if (('a' <= c && 'z' >= c) || ('A' <= c && c <= 'Z'))
-		return (TRUE);
-	return (FALSE);
+	mlx_destroy_window(c->data->ptrwin, c->data->win);
+	ft_exit_sucess(c);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 14:37:20 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 17:42:58 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/11 15:35:54 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,6 +27,8 @@
 #  define BUFFER_SIZE 8
 # endif
 
+typedef int	t_bool;
+
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 **┃                          structure linked list                            ┃
@@ -45,14 +47,14 @@ typedef struct		s_list
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-int					ft_isalpha(int c);
-int					ft_isdigit(int c);
-int					ft_isalnum(int c);
-int					ft_isascii(int c);
-int					ft_isprint(int c);
-int					ft_isspace(int c);
-int					ft_islower(int c);
-int					ft_isupper(int c);
+t_bool				ft_isalpha(int c);
+t_bool				ft_isdigit(int c);
+t_bool				ft_isalnum(int c);
+t_bool				ft_isascii(int c);
+t_bool				ft_isprint(int c);
+t_bool				ft_isspace(int c);
+t_bool				ft_islower(int c);
+t_bool				ft_isupper(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 
@@ -75,7 +77,6 @@ int					ft_free_tab(char **strs);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					get_next_line(int fd, char **line);
-int					ft_stris(char *str, int (*f)(int));
 char				*ft_strrev(char *str);
 char				*ft_strtrim(const char *s1, const char *set);
 char				*ft_strcat(char *dest, const char *src);
@@ -96,6 +97,7 @@ char				*ft_strtrim(const char *s1, const char *set);
 char				*ft_strdup(const char *str);
 char				*ft_strwcdup(char *src, char c);
 char				*ft_strndup(const char *s, size_t n);
+t_bool				ft_stris(char *str, int (*f)(int));
 size_t				ft_strlen(const char *str);
 size_t				ft_strnlen(const char *str, size_t maxlen);
 size_t				ft_strlcpy(char *dest, const char *src, size_t size);
@@ -108,12 +110,12 @@ size_t				ft_strlcat(char *dest, const char *src, size_t size);
 */
 
 int					ft_lstsize(t_list *list);
-t_list				*ft_lstlast(t_list *lst);
-t_list				*ft_lstnew(void *content);
 void				ft_lstadd_back(t_list **alst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstadd_front(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(void *));
+t_list				*ft_lstlast(t_list *lst);
+t_list				*ft_lstnew(void *content);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

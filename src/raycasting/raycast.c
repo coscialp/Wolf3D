@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_isalpha.c                                     .::    .:/ .      .::   */
+/*   raycast.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/07 14:05:46 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/11 15:14:10 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/11 18:10:50 by coscialp     #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/11 19:10:08 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-t_bool	ft_isalpha(int c)
+int		raycast(t_cub3d *c)
 {
-	if (('a' <= c && 'z' >= c) || ('A' <= c && c <= 'Z'))
-		return (TRUE);
-	return (FALSE);
+	(void)c;
+	return (0);
 }

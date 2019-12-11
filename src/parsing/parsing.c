@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:31:43 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 15:19:15 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/11 11:35:13 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,7 +73,7 @@ int				parsing_color(char *line, t_color *color, t_data *data)
 	color->rgba.r = ft_atoi(c[0]);
 	color->rgba.g = ft_atoi(c[1]);
 	color->rgba.b = ft_atoi(c[2]);
-	data->color_sky = line[0] == 'C' ? color->color : data->color_sky;
+	data->color_ceiling = line[0] == 'C' ? color->color : data->color_ceiling;
 	data->color_floor = line[0] == 'F' ? color->color : data->color_floor;
 	ft_free_tab(c);
 	return (1);

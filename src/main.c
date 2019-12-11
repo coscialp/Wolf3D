@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/11 10:54:13 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/11 18:53:34 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,11 +15,11 @@
 
 void	ft_exit_sucess(t_cub3d *c)
 {
-	close(c->data->fd);
-	ft_free_struct(c->data);
-	ft_free_tab(c->map->map_2d);
-	free(c->map);
-	free(c->color);
+	close(DATA->fd);
+	ft_free_struct(DATA);
+	ft_free_tab(MAP->map_2d);
+	free(MAP);
+	free(COL);
 	free(c);
 	exit(EXIT_SUCCESS);
 }
@@ -35,14 +35,16 @@ int		main(int ac, char **av)
 			ft_exit(c, 1);
 		parsing_core(c);
 		if (ac == 3 && !ft_strcmp(av[ac - 1], "display"))
-			print_params(c->data, c->map);
-		if (!(c->data->ptrwin = mlx_init()))
+			print_params(c);
+		if (!(DATA->ptrwin = mlx_init()))
 			ft_exit(c, 3);
-		if (!(c->data->win = mlx_new_window(c->data->ptrwin,
-		c->data->res_x, c->data->res_y, "Cub3D")))
+		if (!(DATA->win = mlx_new_window(DATA->ptrwin,
+		DATA->res_x, DATA->res_y, "Cub3D")))
 			ft_exit(c, 3);
-		mlx_key_hook(c->data->win, key_press, c);
-		mlx_loop(c->data->ptrwin);
+		mlx_loop_hook(DATA->ptrwin, raycast, c);
+		mlx_key_hook(DATA->win, key_press, c);
+		mlx_hook(DATA->win, 17, 0, close_prgm, c);
+		mlx_loop(DATA->ptrwin);
 		ft_exit_sucess(c);
 	}
 	return (msg_error("argument"));

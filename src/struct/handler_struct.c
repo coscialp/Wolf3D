@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:30:07 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 20:14:42 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/11 11:34:00 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,7 +46,7 @@ t_data		*init_data(char *fd)
 	data->res_x = -1;
 	data->res_y = -1;
 	data->color_floor = -1;
-	data->color_sky = -1;
+	data->color_ceiling = -1;
 	data->north_texture = NULL;
 	data->south_texture = NULL;
 	data->west_texture = NULL;

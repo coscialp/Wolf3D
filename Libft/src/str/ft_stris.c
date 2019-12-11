@@ -6,14 +6,14 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/03 19:24:43 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/05 17:37:54 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/11 15:36:02 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_stris(char *str, int (*f)(int))
+t_bool	ft_stris(char *str, int (*f)(int))
 {
 	size_t	i;
 
