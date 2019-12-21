@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/11 18:53:34 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/19 20:40:37 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,10 +41,10 @@ int		main(int ac, char **av)
 		if (!(DATA->win = mlx_new_window(DATA->ptrwin,
 		DATA->res_x, DATA->res_y, "Cub3D")))
 			ft_exit(c, 3);
-		mlx_loop_hook(DATA->ptrwin, raycast, c);
-		mlx_key_hook(DATA->win, key_press, c);
-		mlx_hook(DATA->win, 17, 0, close_prgm, c);
-		mlx_loop(DATA->ptrwin);
+		// mlx_loop_hook(DATA->ptrwin, raycast, c);
+		// mlx_key_hook(DATA->win, key_press, c);
+		// mlx_hook(DATA->win, 17, 0, close_prgm, c);
+		// mlx_loop(DATA->ptrwin);
 		ft_exit_sucess(c);
 	}
 	return (msg_error("argument"));

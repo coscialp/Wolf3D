@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/11 18:10:50 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/11 19:10:08 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/12 16:47:18 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,14 @@
 
 int		raycast(t_cub3d *c)
 {
-	(void)c;
+	int	i;
+	t_vector ray;
+
+	i = 0;
+	(void)ray;
+	while (i < DATA->res_x)
+	{
+		
+	}
 	return (0);
 }
