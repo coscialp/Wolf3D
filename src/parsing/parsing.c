@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:31:43 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/11 11:35:13 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/27 14:47:43 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,6 +32,8 @@ int				parsing_resolution(char *line, t_data *data)
 	int		i;
 
 	i = 0;
+	if (data->res_x != -1 || data->res_y != -1)
+		return (msg_error("resolution"));
 	data->res_x = ft_atoi(line);
 	ft_whilestris(line, &i, ft_isspace, 0);
 	ft_whilestris(line, &i, ft_isdigit, 0);
@@ -83,17 +85,17 @@ int				parsing_texture(char *line, size_t i, t_data *data)
 {
 	if (line[i] == 'R')
 		return (parsing_resolution(line + i + 1, data));
-	else if (line[i] == 'S' && line[i + 1] == 'O')
+	else if (line[i] == 'S' && line[i + 1] == 'O' && !data->south_texture)
 		return (((data->south_texture = ft_strdup(line + i + 3)) != NULL));
-	else if (line[i] == 'N' && line[i + 1] == 'O')
+	else if (line[i] == 'N' && line[i + 1] == 'O' && !data->north_texture)
 		return (((data->north_texture = ft_strdup(line + i + 3)) != NULL));
-	else if (line[i] == 'W' && line[i + 1] == 'E')
+	else if (line[i] == 'W' && line[i + 1] == 'E' && !data->west_texture)
 		return (((data->west_texture = ft_strdup(line + i + 3)) != NULL));
-	else if (line[i] == 'E' && line[i + 1] == 'A')
+	else if (line[i] == 'E' && line[i + 1] == 'A' && !data->east_texture)
 		return (((data->east_texture = ft_strdup(line + i + 3)) != NULL));
-	else if (line[i] == 'S')
+	else if (line[i] == 'S' && !data->sprite_texture)
 		return (((data->sprite_texture = ft_strdup(line + i + 2)) != NULL));
-	return (1);
+	return (msg_error("texture"));
 }
 
 int				texture_is_valid(char *path)

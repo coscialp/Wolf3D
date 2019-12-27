@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 14:37:20 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/20 18:47:39 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/21 11:51:40 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,8 @@
 # include <unistd.h>
 # include <limits.h>
 
+# define TRUE 1
+# define FALSE 0
 # define STR_INT_MIN "-2147483648"
 
 # ifndef BUFFER_SIZE
