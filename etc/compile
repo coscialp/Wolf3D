@@ -1,1 +1,0 @@
-gcc hello_world_mlx.c -l mlx -framework OpenGL -framework AppKit -L minilibx minilibx/libmlx.a -I minilibx Libft/libft.a -fsanitize=address && ./a.out

@@ -1,5 +1,0 @@
-ft_dprintf(1, "res_x:\t%d\nres_y:\t%d\n", data->res_x, data->res_y);
-ft_dprintf(1, "south_texture:\t|%s|\nnorth_texture:\t|%s|\nwest_texture:\t|%s|\neast_texture:\t|%s|\nsprite_texture:\t|%s|\n", data->south_texture, data->north_texture, data->west_texture, data->east_texture, data->sprite_texture);
-ft_dprintf(1, "color_floor:\t%d\ncolor_sky:\t%d\n", data->color_floor, data->color_sky);
-ft_putstr_tab(map->map_2d);
-ft_dprintf(1, "pos_x:\t\t%d\npos_y:\t\t%d\ncompass:\t%c\n", map->start_pos_x, map->start_pos_y, map->compass);
