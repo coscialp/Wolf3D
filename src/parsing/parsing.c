@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:31:43 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/27 14:47:43 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/31 11:43:58 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,32 +52,32 @@ int				parsing_resolution(char *line, t_data *data)
 	return (1);
 }
 
-int				parsing_color(char *line, t_color *color, t_data *data)
+int				parsing_color(char *line, t_cub3d *c)
 {
-	char	**c;
+	char	**col;
 	int		i;
 	int		j;
 
 	j = 0;
-	if (!(c = ft_split(line + 1, ',')))
+	if (!(col = ft_split(line + 1, ',')))
 		return (-1);
-	while (c[j])
+	while (col[j])
 	{
 		i = 0;
-		ft_whilestris(c[j], &i, ft_isspace, 0);
-		ft_whilestris(c[j], &i, ft_isdigit, 0);
-		ft_whilestris(c[j], &i, ft_isspace, 0);
-		if (!ft_strisdigit(c[j]) || !(ft_atoi(c[j]) >= 0 &&
-		ft_atoi(c[j]) <= 255) || c[j][i] || j >= 3)
-			return (ft_free_tab(c));
+		ft_whilestris(col[j], &i, ft_isspace, 0);
+		ft_whilestris(col[j], &i, ft_isdigit, 0);
+		ft_whilestris(col[j], &i, ft_isspace, 0);
+		if (!ft_strisdigit(col[j]) || !(ft_atoi(col[j]) >= 0 &&
+		ft_atoi(col[j]) <= 255) || col[j][i] || j >= 3)
+			return (ft_free_tab(col));
 		j++;
 	}
-	color->rgba.r = ft_atoi(c[0]);
-	color->rgba.g = ft_atoi(c[1]);
-	color->rgba.b = ft_atoi(c[2]);
-	data->color_ceiling = line[0] == 'C' ? color->color : data->color_ceiling;
-	data->color_floor = line[0] == 'F' ? color->color : data->color_floor;
-	ft_free_tab(c);
+	c->color.rgba.r = ft_atoi(col[0]);
+	c->color.rgba.g = ft_atoi(col[1]);
+	c->color.rgba.b = ft_atoi(col[2]);
+	c->data.col_ceil = line[0] == 'C' ? c->color.color : c->data.col_ceil;
+	c->data.col_floor = line[0] == 'F' ? c->color.color : c->data.col_floor;
+	ft_free_tab(col);
 	return (1);
 }
 

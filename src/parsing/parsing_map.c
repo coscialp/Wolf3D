@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/03 19:00:10 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/11 18:55:30 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/31 15:50:23 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,19 +15,31 @@
 
 void	init_player(t_cub3d *c, char pos, int i, int j)
 {
-	PLAYER.pos_x = i + 0.5f;
-	PLAYER.pos_y = j + 0.5f;
-	MAP->start_pos_x = i;
-	MAP->start_pos_y = j;
-	MAP->compass = pos;
-	if (pos == 'N')
-		PLAYER.rotation = 0;
-	else if (pos == 'S')
-		PLAYER.rotation = 180;
-	else if (pos == 'E')
-		PLAYER.rotation = 90;
+	c->player.pos_x = i + 0.5f;
+	c->player.pos_y = j + 0.5f;
+	c->map.start_pos_x = i;
+	c->map.start_pos_y = j;
+	c->map.compass = pos;
+	if (pos == 'E')
+	{
+		c->player.dir.x = 0;
+		c->player.dir.y = 1;
+	}
 	else if (pos == 'W')
-		PLAYER.rotation = 270;
+	{
+		c->player.dir.x = 0;
+		c->player.dir.y = -1;
+	}
+	else if (pos == 'S')
+	{
+		c->player.dir.x = 1;
+		c->player.dir.y = 0;
+	}
+	else if (pos == 'N')
+	{
+		c->player.dir.x = -1;
+		c->player.dir.y = 0;
+	}
 }
 
 int		check_map(t_map *map, int i, int j, t_cub3d *c)
@@ -54,20 +66,20 @@ int		parsing_map(t_cub3d *c)
 	char	*map_without_space;
 
 	i = 0;
-	if (!(map_without_space = ft_strwcdup(MAP->map_1d, ' ')))
+	if (!(map_without_space = ft_strwcdup(c->map.map_1d, ' ')))
 		return (msg_error("malloc"));
-	ft_strdel(&MAP->map_1d);
-	if (!(MAP->map_2d = ft_split_line(map_without_space)))
+	ft_strdel(&c->map.map_1d);
+	if (!(c->map.map_2d = ft_split_line(map_without_space)))
 		return (msg_error("malloc"));
 	ft_strdel(&map_without_space);
-	if (map_dimension(MAP) == -1)
+	if (map_dimension(&c->map) == -1)
 		return (-1);
-	while (MAP->map_2d[i])
+	while (c->map.map_2d[i])
 	{
 		j = 0;
-		while (MAP->map_2d[i][j])
+		while (c->map.map_2d[i][j])
 		{
-			if (check_map(MAP, i, j, c) == -1)
+			if (check_map(&c->map, i, j, c) == -1)
 				return (-1);
 			j++;
 		}

@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 14:37:20 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/21 11:51:40 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/31 12:32:55 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -141,6 +141,7 @@ void				*ft_realloc(void *ptr, size_t size);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
+int					ft_abs(int n);
 int					ft_atoi(const char *str);
 char				*ft_ftoa(double fl, int second_part);
 char				*ft_itoa(int n);

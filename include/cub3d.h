@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/11 19:09:59 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/31 15:56:01 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,10 +23,17 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-# define MAP c->map
-# define PLAYER c->player
-# define DATA c->data
-# define COL c->color
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃								struct math                                   ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+typedef struct	s_vector
+{
+	double		x;
+	double		y;
+}				t_vector;
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -39,9 +46,8 @@ typedef struct	s_data
 	int				fd;
 	int				res_x;
 	int				res_y;
-	int				color_floor;
-	int				color_ceiling;
-	int				cam_height;
+	int				col_floor;
+	int				col_ceil;
 	char			*north_texture;
 	char			*south_texture;
 	char			*west_texture;
@@ -49,6 +55,7 @@ typedef struct	s_data
 	char			*sprite_texture;
 	void			*ptrwin;
 	void			*win;
+	t_vector		plane;
 
 }				t_data;
 
@@ -85,7 +92,7 @@ typedef union	u_color
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-**┃								struct img                                  ┃
+**┃								struct img                                    ┃
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
@@ -102,19 +109,13 @@ typedef struct	s_image
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-**┃								struct math                                   ┃
+**┃								struct player                                 ┃
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-typedef struct	s_vector
-{
-	double		u;
-	double		v;
-}				t_vector;
-
 typedef struct	s_player
 {
-	int			rotation;
+	t_vector	dir;
 	double		pos_x;
 	double		pos_y;
 }				t_player;
@@ -127,9 +128,21 @@ typedef struct	s_player
 
 typedef struct	s_cub3d
 {
-	t_data		*data;
-	t_map		*map;
-	t_color		*color;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
+	int			height_draw;
+	int			draw_start;
+	int			draw_end;
+	double		cam_x;
+	t_vector	side_dist;
+	t_vector	delta_dist;
+	t_data		data;
+	t_map		map;
+	t_color		color;
 	t_player	player;
 }				t_cub3d;
 
@@ -142,9 +155,8 @@ typedef struct	s_cub3d
 void			parsing_core(t_cub3d *c);
 int				parsing_texture(char *current_line, size_t i, t_data *data);
 int				parsing_resolution(char *line, t_data *data);
-int				parsing_analyser(char *line, t_data *data, t_map *map,
-				t_color *color);
-int				parsing_color(char *line, t_color *color, t_data *data);
+int				parsing_analyser(char *line, t_cub3d *c);
+int				parsing_color(char *line, t_cub3d *c);
 int				parsing_name(char *name);
 int				map_dimension(t_map *map);
 int				read_map(int fd, t_map *map, char *current_line);
@@ -158,7 +170,7 @@ int				texture_is_valid(char *path);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-void			ft_exit(t_cub3d *c, int f);
+void			ft_exit(t_cub3d *c);
 void			print_params(t_cub3d *c);
 int				msg_error(char *reason);
 t_bool			ft_isargb(unsigned char color);
@@ -172,11 +184,11 @@ int				secu_initialize(char **map_1d, int fd);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-void			ft_free_struct(t_data *data);
-t_cub3d			*init_cub3d(char *fd);
-t_data			*init_data(char *fd);
-t_map			*init_map(t_cub3d *c);
-t_color			*init_color(t_cub3d *c);
+void			ft_free_struct(t_data data);
+t_cub3d			*init_cub3d(char *file);
+t_data			init_data(char *file);
+t_map			init_map(void);
+t_color			init_color(void);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -194,6 +206,6 @@ int				key_press(int keycode, t_cub3d *c);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-int				raycast(t_cub3d *c);
+void			raycast(t_cub3d *c);
 
 #endif

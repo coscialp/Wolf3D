@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   exit.c                                           .::    .:/ .      .::   */
+/*   ft_abs.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/12/10 18:32:44 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/30 14:09:00 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/31 12:31:22 by coscialp     #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/31 12:32:30 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	ft_exit(t_cub3d *c)
+int		ft_abs(int n)
 {
-	close(c->data.fd);
-	ft_free_struct(c->data);
-	ft_strdel(&c->map.map_1d);
-	if (c->map.map_2d)
-		ft_free_tab(c->map.map_2d);
-	free(c);
-	exit(EXIT_FAILURE);
+	if (n < 0)
+		return (n * -1);
+	return (n);
 }
