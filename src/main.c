@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/31 15:50:03 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/02 19:50:03 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,7 @@ void	init_plane(t_cub3d *c)
 	if (c->map.compass == 'W')
 	{
 		c->data.plane.x = -0.66;
-		c->data.plane.y = -0;
+		c->data.plane.y = 0;
 	}
 	else if (c->map.compass == 'E')
 	{
@@ -37,13 +37,40 @@ void	init_plane(t_cub3d *c)
 	else if (c->map.compass == 'N')
 	{
 		c->data.plane.x = 0;
-		c->data.plane.y = -0.66;
+		c->data.plane.y = 0.66;
 	}
 	else if (c->map.compass == 'S')
 	{
 		c->data.plane.x = 0;
-		c->data.plane.y = 0.66;
+		c->data.plane.y = -0.66;
 	}
+	c->movspeed = 0.075;
+	c->rotspeed = 0.04;
+}
+
+int		main_loop(t_cub3d *c)
+{
+	if (c->move)
+		move_camera(c, c->move);
+	else if (c->rotate)
+		rotate(c, c->rotate);
+	raycast(c);
+	mlx_put_image_to_window(c->data.ptrwin, c->data.win, c->img.img, 0, 0);
+	return (0);
+}
+
+void	init_windows(t_cub3d *c)
+{
+	if (!(c->data.ptrwin = mlx_init()))
+		ft_exit(c);
+	if (!(c->data.win = mlx_new_window(c->data.ptrwin,
+	c->data.res_x, c->data.res_y, "Cub3D")))
+		ft_exit(c);
+	c->img.img = mlx_new_image(c->data.ptrwin,
+	c->data.res_x, c->data.res_y);
+	c->img.ptr = (int *)mlx_get_data_addr(c->img.img, &c->img.bpp,
+	&c->img.size_line, &c->img.endian);
+	loading_all_tex(c);
 }
 
 int		main(int ac, char **av)
@@ -59,14 +86,11 @@ int		main(int ac, char **av)
 		if (ac == 3 && !ft_strcmp(av[ac - 1], "display"))
 			print_params(c);
 		init_plane(c);
-		if (!(c->data.ptrwin = mlx_init()))
-			ft_exit(c);
-		if (!(c->data.win = mlx_new_window(c->data.ptrwin,
-		c->data.res_x, c->data.res_y, "Cub3D")))
-			ft_exit(c);
-		raycast(c);
-		mlx_key_hook(c->data.win, key_press, c);
-		mlx_hook(c->data.win, 17, 0, close_prgm, c);
+		init_windows(c);
+		mlx_hook(c->data.win, 2, 0, &key_press, c);
+		mlx_hook(c->data.win, 3, 0, &key_release, c);
+		mlx_hook(c->data.win, 17, 0, &close_prgm, c);
+		mlx_loop_hook(c->data.ptrwin, &main_loop, c);
 		mlx_loop(c->data.ptrwin);
 		ft_exit_sucess(c);
 	}

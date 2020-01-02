@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/12/09 15:43:33 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2019/12/11 18:15:26 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/02 18:21:17 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -60,16 +60,16 @@ MOBJ_PATH = $(OBJ_PATH)
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 PINC_NAME = cub3d.h
-PSRC_NAME = parsing.c parsing_core.c parsing_map.c
+PSRC_NAME = parsing.c parsing_core.c parsing_map.c texture.c
 
 EINC_NAME = cub3d.h
 ESRC_NAME = error.c print.c exit.c
 
 EVINC_NAME = cub3d.h
-EVSRC_NAME = key_event.c other_event.c
+EVSRC_NAME = key_event.c other_event.c move.c
 
 RINC_NAME = cub3d.h
-RSRC_NAME = raycast.c
+RSRC_NAME = raycast.c draw.c
 
 SINC_NAME = cub3d.h
 SSRC_NAME = handler_struct.c

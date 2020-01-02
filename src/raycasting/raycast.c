@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/11 18:10:50 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/31 15:56:15 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/02 19:55:23 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,8 +42,9 @@ void	init_step(t_cub3d *c, t_vector ray)
 	}
 }
 
-void	throwing_ray(t_cub3d *c)
+void	throwing_ray(t_cub3d *c, t_vector ray)
 {
+	init_step(c, ray);
 	while (c->hit == 0)
 	{
 		if (c->side_dist.x < c->side_dist.y)
@@ -63,52 +64,34 @@ void	throwing_ray(t_cub3d *c)
 	}
 }
 
-void	draw_wall(t_cub3d *c, int x)
+int		wall_orientation(t_vector ray, t_cub3d *c)
 {
-	int		color;
-	int		y;
-
-	y = c->draw_start;
-	color = c->side == 1 ? 0x00ff00 / 2 : 0x00ff00;
-	while (y < c->draw_end)
-	{
-		mlx_pixel_put(c->data.ptrwin, c->data.win, x, y, color);
-		y++;
-	}
+	if (c->side)
+		return (ray.y < 0 ? 0 : 1);
+	return (ray.x < 0 ? 2 : 3);
 }
 
-void	draw_floor(t_cub3d *c, int x)
+void	raycast_texture(t_vector ray, t_cub3d *c, double wall)
 {
-	int		y;
-
-	y = c->draw_end;
-	while (y < c->data.res_y)
-	{
-		mlx_pixel_put(c->data.ptrwin, c->data.win, x, y, c->data.col_floor);
-		y++;
-	}
+	if (c->draw_end >= c->data.res_y)
+		c->draw_end = c->data.res_y - 1;
+	if (c->side == 0)
+		c->wall_pos = c->player.pos_y + wall * ray.y;
+	else
+		c->wall_pos = c->player.pos_x + wall * ray.x;
+	c->direction = wall_orientation(ray, c);
+	c->wall_pos -= (int)c->wall_pos;
+	c->tex_x = (int)(c->wall_pos * c->tex[c->direction].width);
+	if (c->side == 0 && ray.x > 0)
+		c->tex_x = c->tex[c->direction].width - c->tex_x - 1;
+	if (c->side == 0 && ray.y < 0)
+		c->tex_x = c->tex[c->direction].width - c->tex_x - 1;
+	c->step = 1.0 * c->tex[c->direction].height / c->height_draw;
+	c->tex_pos =
+	(c->draw_start - c->data.res_y / 2 + c->height_draw / 2) * c->step;
 }
 
-void	draw_ceilling(t_cub3d *c, int x)
-{
-	int		y;
-
-	y = 0;
-	while (y < c->draw_start)
-	{
-		mlx_pixel_put(c->data.ptrwin, c->data.win, x, y, c->data.col_ceil);
-		y++;
-	}
-}
-
-void	draw(t_cub3d *c, int x)
-{
-	draw_wall(c, x);
-	draw_floor(c, x);
-	draw_ceilling(c, x);
-}
-
-void	raycast(t_cub3d *c)
+int		raycast(t_cub3d *c)
 {
 	int			x;
 	double		wall;
@@ -120,8 +103,7 @@ void	raycast(t_cub3d *c)
 		c->cam_x = 2.0 * x / (double)c->data.res_x - 1.0;
 		ray.x = c->player.dir.x + c->data.plane.x * c->cam_x;
 		ray.y = c->player.dir.y + c->data.plane.y * c->cam_x;
-		init_step(c, ray);
-		throwing_ray(c);
+		throwing_ray(c, ray);
 		if (c->side == 0)
 			wall = (c->map_x - c->player.pos_x + (1 - c->step_x) / 2) / ray.x;
 		else
@@ -131,8 +113,8 @@ void	raycast(t_cub3d *c)
 		if (c->draw_start < 0)
 			c->draw_start = 0;
 		c->draw_end = c->height_draw / 2 + c->data.res_y / 2;
-		if (c->draw_end >= c->data.res_y)
-			c->draw_end = c->data.res_y - 1;
+		raycast_texture(ray, c, wall);
 		draw(c, x);
 	}
+	return (0);
 }
