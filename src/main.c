@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/02 19:50:03 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/04 18:02:31 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,9 +50,14 @@ void	init_plane(t_cub3d *c)
 
 int		main_loop(t_cub3d *c)
 {
+	// if (c->move && c->rotate)
+	// {
+	// 	move_camera(c, c->move);
+	// 	rotate(c, c->move);
+	// }
 	if (c->move)
 		move_camera(c, c->move);
-	else if (c->rotate)
+	if (c->rotate)
 		rotate(c, c->rotate);
 	raycast(c);
 	mlx_put_image_to_window(c->data.ptrwin, c->data.win, c->img.img, 0, 0);
