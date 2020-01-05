@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/11 18:10:50 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/05 15:38:11 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/05 15:46:45 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -109,7 +109,7 @@ int		raycast(t_cub3d *c)
 		else
 			wall = (c->map_y - c->player.pos_y + (1 - c->step_y) / 2) / ray.y;
 		c->height_draw = (c->data.res_y / wall);
-		c->draw_start = -c->height_draw / 2 + c->data.res_y / 2 + c->move_cam;
+		c->draw_start = -c->height_draw / 2 + c->data.res_y / 2 + c->move_cam - c->sneak;
 		if (c->draw_start < 0)
 			c->draw_start = 0;
 		c->draw_end = c->height_draw / 2 + c->data.res_y / 2 + c->move_cam;

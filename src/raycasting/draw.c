@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/02 11:48:31 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/05 15:31:52 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/05 15:44:06 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@ void	draw_wall(t_cub3d *c, int x)
 {
 	int		y;
 
-	y = c->draw_start - c->sneak;
+	y = c->draw_start;
 	while (y < c->draw_end)
 	{
 		c->tex_y = (int)c->tex_pos & (c->tex[c->direction].height - 1);
@@ -46,7 +46,7 @@ void	draw_ceilling(t_cub3d *c, int x)
 	int		y;
 
 	y = 0;
-	while (y < c->draw_start - c->sneak)
+	while (y < c->draw_start)
 	{
 		c->img.ptr[y * c->data.res_x + x] = c->data.col_ceil;
 		y++;

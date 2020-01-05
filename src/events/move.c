@@ -6,27 +6,31 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/02 12:53:46 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/05 15:07:41 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/05 15:49:28 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	icanmove(t_cub3d *c, char orientation)
+void	icanmove_x(t_cub3d *c, char orientation)
 {
 	if (c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] ==
 	'1' && orientation == 'U')
-	{
 		c->player.pos_x -= c->player.dir.x * c->movspeed;
-		c->player.pos_y -= c->player.dir.y * c->movspeed;
-	}
 	else if (c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] ==
 	'1' && orientation == 'D')
-	{
 		c->player.pos_x += c->player.dir.x * c->movspeed;
+}
+
+void	icanmove_y(t_cub3d *c, char orientation)
+{
+	if (c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] ==
+	'1' && orientation == 'U')
+		c->player.pos_y -= c->player.dir.y * c->movspeed;
+	else if (c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] ==
+	'1' && orientation == 'D')
 		c->player.pos_y += c->player.dir.y * c->movspeed;
-	}
 }
 
 void	move_camera(t_cub3d *c, char orientation)
@@ -34,14 +38,16 @@ void	move_camera(t_cub3d *c, char orientation)
 	if (orientation == 'U')
 	{
 		c->player.pos_x += c->player.dir.x * c->movspeed;
+		icanmove_x(c, orientation);
 		c->player.pos_y += c->player.dir.y * c->movspeed;
 	}
 	else if (orientation == 'D')
 	{
 		c->player.pos_x -= c->player.dir.x * c->movspeed;
+		icanmove_x(c, orientation);
 		c->player.pos_y -= c->player.dir.y * c->movspeed;
 	}
-	icanmove(c, orientation);
+	icanmove_y(c, orientation);
 }
 
 void	move_y_camera(t_cub3d *c, char orientation)
