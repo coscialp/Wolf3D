@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/11 18:10:50 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/05 15:46:45 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/05 16:08:39 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,8 +67,8 @@ void	throwing_ray(t_cub3d *c, t_vector ray)
 int		wall_orientation(t_vector ray, t_cub3d *c)
 {
 	if (c->side)
-		return (ray.y < 0 ? 0 : 1);
-	return (ray.x < 0 ? 2 : 3);
+		return (ray.y < 0 ? 3 : 2);
+	return (ray.x < 0 ? 0 : 1);
 }
 
 void	raycast_texture(t_vector ray, t_cub3d *c, double wall)
@@ -84,7 +84,7 @@ void	raycast_texture(t_vector ray, t_cub3d *c, double wall)
 	c->tex_x = (int)(c->wall_pos * c->tex[c->direction].width);
 	if (c->side == 0 && ray.x > 0)
 		c->tex_x = c->tex[c->direction].width - c->tex_x - 1;
-	if (c->side == 0 && ray.y < 0)
+	if (c->side == 1 && ray.y < 0)
 		c->tex_x = c->tex[c->direction].width - c->tex_x - 1;
 	c->step = 1.0 * c->tex[c->direction].height / c->height_draw;
 	c->tex_pos = ((c->draw_start - c->move_cam)
