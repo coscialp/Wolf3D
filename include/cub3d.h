@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/02 19:37:20 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/05 14:27:23 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -132,6 +132,7 @@ typedef struct	s_player
 typedef struct	s_cub3d
 {
 	char		move;
+	char		move_y;
 	char		rotate;
 	int			map_x;
 	int			map_y;
@@ -145,6 +146,8 @@ typedef struct	s_cub3d
 	int			tex_x;
 	int			tex_y;
 	int			direction;
+	int			sneak;
+	int			move_cam;
 	double		step;
 	double		tex_pos;
 	double		cam_x;
@@ -220,6 +223,7 @@ int				key_press(int keycode, t_cub3d *c);
 int				key_release(int keycode, t_cub3d *c);
 void			rotate(t_cub3d *c, char rotate);
 void			move_camera(t_cub3d *c, char orientation);
+void			move_y_camera(t_cub3d *c, char orientation);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

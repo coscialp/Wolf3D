@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/02 12:53:46 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/02 18:19:03 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/05 15:07:41 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,6 +42,14 @@ void	move_camera(t_cub3d *c, char orientation)
 		c->player.pos_y -= c->player.dir.y * c->movspeed;
 	}
 	icanmove(c, orientation);
+}
+
+void	move_y_camera(t_cub3d *c, char orientation)
+{
+	if (orientation == 'U')
+		c->move_cam += 20;
+	else if (orientation == 'D')
+		c->move_cam -= 20;
 }
 
 void	rotate(t_cub3d *c, char rotate)

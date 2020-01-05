@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/11 18:10:50 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/02 19:55:23 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/05 15:38:11 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -87,8 +87,8 @@ void	raycast_texture(t_vector ray, t_cub3d *c, double wall)
 	if (c->side == 0 && ray.y < 0)
 		c->tex_x = c->tex[c->direction].width - c->tex_x - 1;
 	c->step = 1.0 * c->tex[c->direction].height / c->height_draw;
-	c->tex_pos =
-	(c->draw_start - c->data.res_y / 2 + c->height_draw / 2) * c->step;
+	c->tex_pos = ((c->draw_start - c->move_cam)
+	- c->data.res_y / 2 + c->height_draw / 2) * c->step;
 }
 
 int		raycast(t_cub3d *c)
@@ -109,10 +109,10 @@ int		raycast(t_cub3d *c)
 		else
 			wall = (c->map_y - c->player.pos_y + (1 - c->step_y) / 2) / ray.y;
 		c->height_draw = (c->data.res_y / wall);
-		c->draw_start = -c->height_draw / 2 + c->data.res_y / 2;
+		c->draw_start = -c->height_draw / 2 + c->data.res_y / 2 + c->move_cam;
 		if (c->draw_start < 0)
 			c->draw_start = 0;
-		c->draw_end = c->height_draw / 2 + c->data.res_y / 2;
+		c->draw_end = c->height_draw / 2 + c->data.res_y / 2 + c->move_cam;
 		raycast_texture(ray, c, wall);
 		draw(c, x);
 	}
