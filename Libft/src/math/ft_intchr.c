@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   exit.c                                           .::    .:/ .      .::   */
+/*   ft_intchr.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/12/10 18:32:44 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/06 15:55:51 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/06 14:53:06 by coscialp     #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/06 14:55:32 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	ft_exit(t_cub3d *c)
+int		*ft_intchr(int *tab, size_t size, int n)
 {
-	close(c->data.fd);
-	ft_free_struct(c->data);
-	ft_strdel(&c->map.map_1d);
-	if (c->map.map_2d)
-		ft_free_tab(c->map.map_2d);
-	free(c->sprite);
-	free(c->sprite_order);
-	free(c->sprite_dist);
-	free(c->zbuffer);
-	free(c);
-	exit(EXIT_FAILURE);
+	int		i;
+
+	i = 0;
+	while (size--)
+	{
+		if (tab[i] == n)
+			return (tab + i);
+		i++;
+	}
+	return (0);
 }

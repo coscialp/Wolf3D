@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/11 10:52:05 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/05 14:19:27 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/06 14:19:22 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,7 +33,9 @@ int		key_press(int keycode, t_cub3d *c)
 	else if (keycode == DOWN)
 		c->move_y = 'D';
 	else if (keycode == SHIFT)
-		c->sneak = 100;
+		c->sneak = 200;
+	else if (keycode == SPACE)
+		c->movspeed = 0.15;
 	return (1);
 }
 
@@ -53,5 +55,7 @@ int		key_release(int keycode, t_cub3d *c)
 		c->move_y = 0;
 	else if (keycode == SHIFT)
 		c->sneak = 0;
+	else if (keycode == SPACE)
+		c->movspeed = 0.075;
 	return (1);
 }

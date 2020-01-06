@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/05 16:00:19 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/06 17:43:21 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,6 +35,12 @@ typedef struct	s_vector
 	double		y;
 }				t_vector;
 
+typedef struct	s_pos
+{
+	int			x;
+	int			y;
+}				t_pos;
+
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 **┃								struct parsing map                            ┃
@@ -48,6 +54,7 @@ typedef struct	s_data
 	int				res_y;
 	int				col_floor;
 	int				col_ceil;
+	int				num_sprite;
 	char			*north_texture;
 	char			*south_texture;
 	char			*west_texture;
@@ -120,6 +127,13 @@ typedef struct	s_player
 	double		pos_y;
 }				t_player;
 
+typedef struct	s_sprite
+{
+	double		x;
+	double		y;
+	t_image		tex;
+}				t_sprite;
+
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 **┃								struct cub3D                                  ┃
@@ -143,24 +157,36 @@ typedef struct	s_cub3d
 	int			tex_x;
 	int			tex_y;
 	int			direction;
+	int			*sprite_order;
 	int			sneak;
 	int			move_cam;
+	int			sprite_screen;
+	int			sprite_height;
+	int			sprite_width;
 	double		step;
 	double		tex_pos;
 	double		cam_x;
 	double		movspeed;
 	double		rotspeed;
 	double		wall_pos;
+	double		*zbuffer;
+	double		*sprite_dist;
+	double		inv_correc;
+	t_vector	sprite_start;
+	t_vector	sprite_end;
+	t_vector	transform;
 	t_vector	old_plane;
 	t_vector	old_dir;
 	t_vector	side_dist;
 	t_vector	delta_dist;
+	t_vector	sprite_pos;
 	t_data		data;
 	t_map		map;
 	t_color		color;
 	t_player	player;
 	t_image		img;
 	t_image		tex[5];
+	t_sprite	*sprite;
 }				t_cub3d;
 
 /*
@@ -170,12 +196,14 @@ typedef struct	s_cub3d
 */
 
 void			loading_all_tex(t_cub3d *c);
+void			load_tex_sprite(t_cub3d *c);
 void			parsing_core(t_cub3d *c);
 int				parsing_texture(char *current_line, size_t i, t_data *data);
 int				parsing_resolution(char *line, t_data *data);
 int				parsing_analyser(char *line, t_cub3d *c);
 int				parsing_color(char *line, t_cub3d *c);
 int				parsing_name(char *name);
+int				parsing_sprite(t_cub3d *c);
 int				map_dimension(t_map *map);
 int				read_map(int fd, t_map *map, char *current_line);
 int				parsing_map(t_cub3d *c);
@@ -215,6 +243,7 @@ t_color			init_color(void);
 */
 
 void			ft_exit_sucess(t_cub3d *c);
+void			draw_sprite(t_cub3d *c);
 int				close_prgm(t_cub3d *c);
 int				key_press(int keycode, t_cub3d *c);
 int				key_release(int keycode, t_cub3d *c);
@@ -229,6 +258,9 @@ void			move_y_camera(t_cub3d *c, char orientation);
 */
 
 int				raycast(t_cub3d *c);
+int				wall_orientation(t_vector ray, t_cub3d *c);
+int				sprite_casting(t_cub3d *c);
 void			draw(t_cub3d *c, int x);
+void			raycast_sprite(t_cub3d *c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/11 18:10:50 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/05 16:08:39 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/06 18:40:53 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,14 +64,7 @@ void	throwing_ray(t_cub3d *c, t_vector ray)
 	}
 }
 
-int		wall_orientation(t_vector ray, t_cub3d *c)
-{
-	if (c->side)
-		return (ray.y < 0 ? 3 : 2);
-	return (ray.x < 0 ? 0 : 1);
-}
-
-void	raycast_texture(t_vector ray, t_cub3d *c, double wall)
+void	raycast_texture(t_vector ray, t_cub3d *c, double wall, int x)
 {
 	if (c->draw_end >= c->data.res_y)
 		c->draw_end = c->data.res_y - 1;
@@ -89,6 +82,15 @@ void	raycast_texture(t_vector ray, t_cub3d *c, double wall)
 	c->step = 1.0 * c->tex[c->direction].height / c->height_draw;
 	c->tex_pos = ((c->draw_start - c->move_cam)
 	- c->data.res_y / 2 + c->height_draw / 2) * c->step;
+	c->zbuffer[x] = wall;
+}
+
+void	secu_draw(int *draw, t_cub3d *c)
+{
+	if (*draw < 0)
+		*draw = 0;
+	else if (*draw > c->data.res_y)
+		*draw = c->data.res_y;
 }
 
 int		raycast(t_cub3d *c)
@@ -109,12 +111,12 @@ int		raycast(t_cub3d *c)
 		else
 			wall = (c->map_y - c->player.pos_y + (1 - c->step_y) / 2) / ray.y;
 		c->height_draw = (c->data.res_y / wall);
-		c->draw_start = -c->height_draw / 2 + c->data.res_y / 2 + c->move_cam - c->sneak;
-		if (c->draw_start < 0)
-			c->draw_start = 0;
-		c->draw_end = c->height_draw / 2 + c->data.res_y / 2 + c->move_cam;
-		raycast_texture(ray, c, wall);
+		c->draw_start = -(c->height_draw) / 2 + c->data.res_y / 2 + c->move_cam;
+		secu_draw(&c->draw_start, c);
+		c->draw_end = (c->height_draw) / 2 + c->data.res_y / 2 + c->move_cam;
+		secu_draw(&c->draw_end, c);
+		raycast_texture(ray, c, wall, x);
 		draw(c, x);
 	}
-	return (0);
+	return (sprite_casting(c));
 }

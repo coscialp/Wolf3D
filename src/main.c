@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/05 14:24:22 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/06 17:43:57 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,10 @@ void	ft_exit_sucess(t_cub3d *c)
 {
 	close(c->data.fd);
 	ft_free_struct(c->data);
+	free(c->sprite);
+	free(c->sprite_order);
+	free(c->sprite_dist);
+	free(c->zbuffer);
 	ft_free_tab(c->map.map_2d);
 	free(c);
 	exit(EXIT_SUCCESS);
@@ -57,6 +61,7 @@ int		main_loop(t_cub3d *c)
 	if (c->move_y)
 		move_y_camera(c, c->move_y);
 	raycast(c);
+	mlx_clear_window(c->data.ptrwin, c->data.win);
 	mlx_put_image_to_window(c->data.ptrwin, c->data.win, c->img.img, 0, 0);
 	return (0);
 }
@@ -73,6 +78,7 @@ void	init_windows(t_cub3d *c)
 	c->img.ptr = (int *)mlx_get_data_addr(c->img.img, &c->img.bpp,
 	&c->img.size_line, &c->img.endian);
 	loading_all_tex(c);
+	load_tex_sprite(c);
 	c->move_cam = 0;
 }
 
@@ -90,6 +96,7 @@ int		main(int ac, char **av)
 			print_params(c);
 		init_plane(c);
 		init_windows(c);
+		raycast_sprite(c);
 		mlx_hook(c->data.win, 2, 0, &key_press, c);
 		mlx_hook(c->data.win, 3, 0, &key_release, c);
 		mlx_hook(c->data.win, 17, 0, &close_prgm, c);

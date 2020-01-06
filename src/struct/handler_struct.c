@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:30:07 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/31 11:43:46 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/06 17:42:20 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,6 +41,7 @@ t_data		init_data(char *file)
 	data.res_y = -1;
 	data.col_floor = -1;
 	data.col_ceil = -1;
+	data.num_sprite = 0;
 	data.north_texture = NULL;
 	data.south_texture = NULL;
 	data.west_texture = NULL;

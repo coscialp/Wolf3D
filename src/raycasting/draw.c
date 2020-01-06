@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/02 11:48:31 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/05 16:06:55 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/06 18:39:04 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,7 +24,6 @@ void	draw_wall(t_cub3d *c, int x)
 		c->tex_pos += c->step;
 		c->img.ptr[y * c->data.res_x + x] = c->tex[c->direction].ptr[c->tex_y *
 		c->tex[c->direction].width + c->tex_x];
-		// c->img.ptr[y * c->data.res_x + x] = 0x00ff00;
 		y++;
 	}
 }
@@ -50,6 +49,36 @@ void	draw_ceilling(t_cub3d *c, int x)
 	{
 		c->img.ptr[y * c->data.res_x + x] = c->data.col_ceil;
 		y++;
+	}
+}
+
+void	draw_sprite(t_cub3d *c)
+{
+	int			stripe;
+	int			y;
+	int			d;
+	long		color;
+	t_pos		tex;
+
+	stripe = c->sprite_start.x;
+	while (stripe < c->sprite_end.x)
+	{
+		tex.x = (int)((256 * (stripe - (-c->sprite_width / 2 + c->sprite_screen)) * c->sprite[0].tex.width / c->sprite_width) / 256);
+		// ft_dprintf(1, "transform.y:\t%f\nstripe:\t%d\nzbuffer:\t%f\n", c->transform.y, stripe, c->zbuffer[stripe]);
+		if (c->transform.y > 0 && stripe > 0 && stripe < c->data.res_x && c->transform.y < c->zbuffer[stripe])
+		{
+			 y = c->sprite_start.y;
+			 while (y < c->sprite_end.y)
+			 {
+				d = y * 256 - c->data.res_x * 128 + c->sprite_height * 128;
+				tex.y = ((d * c->sprite[0].tex.height) / c->sprite_height) / 256;
+				color = c->sprite[0].tex.ptr[tex.y * c->sprite[0].tex.width + tex.x];
+				if ((color & 0xffffff) != 0)
+					c->img.ptr[y * c->data.res_x + stripe] = color;
+				y++;
+			 }
+		}
+		stripe++;
 	}
 }
 
