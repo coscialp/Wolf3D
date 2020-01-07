@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/11 10:52:05 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/06 14:19:22 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/07 15:15:27 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,16 +24,18 @@ int		key_press(int keycode, t_cub3d *c)
 		c->move = 'U';
 	else if (keycode == S)
 		c->move = 'D';
-	else if (keycode == A || keycode == LEFT)
+	else if (keycode == A)
+		c->move_lat = 'L';
+	else if (keycode == D)
+		c->move_lat = 'R';
+	else if (keycode == LEFT)
 		c->rotate = 'L';
-	else if (keycode == D || keycode == RIGHT)
+	else if (keycode == RIGHT)
 		c->rotate = 'R';
 	else if (keycode == UP)
 		c->move_y = 'U';
 	else if (keycode == DOWN)
 		c->move_y = 'D';
-	else if (keycode == SHIFT)
-		c->sneak = 200;
 	else if (keycode == SPACE)
 		c->movspeed = 0.15;
 	return (1);
@@ -45,16 +47,18 @@ int		key_release(int keycode, t_cub3d *c)
 		c->move = 0;
 	else if (keycode == S)
 		c->move = 0;
-	else if (keycode == A || keycode == LEFT)
+	else if (keycode == A)
+		c->move_lat = 0;
+	else if (keycode == D)
+		c->move_lat = 0;
+	else if (keycode == LEFT)
 		c->rotate = 0;
-	else if (keycode == D || keycode == RIGHT)
+	else if (keycode == RIGHT)
 		c->rotate = 0;
 	else if (keycode == UP)
 		c->move_y = 0;
 	else if (keycode == DOWN)
 		c->move_y = 0;
-	else if (keycode == SHIFT)
-		c->sneak = 0;
 	else if (keycode == SPACE)
 		c->movspeed = 0.075;
 	return (1);

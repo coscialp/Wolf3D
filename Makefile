@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/12/09 15:43:33 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2020/01/06 17:28:43 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/07 19:48:44 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -66,10 +66,10 @@ EINC_NAME = cub3d.h
 ESRC_NAME = error.c print.c exit.c
 
 EVINC_NAME = cub3d.h
-EVSRC_NAME = key_event.c other_event.c move.c
+EVSRC_NAME = key_event.c other_event.c move.c icanmove.c save.c
 
 RINC_NAME = cub3d.h
-RSRC_NAME = raycast.c draw.c raycast_sprite.c
+RSRC_NAME = raycast.c draw.c raycast_sprite.c raycast_floor.c
 
 SINC_NAME = cub3d.h
 SSRC_NAME = handler_struct.c
@@ -113,8 +113,8 @@ SINC = $(addprefix $(INC_PATH), $(SINC_NAME))
 # ┃									FLAG                                      ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-FLAGS = -Wall -Werror -Wextra -O3 -g3 -fsanitize=address#-fsanitize=undefined
-MLXFLAG = -l mlx -framework OpenGL -framework AppKit -L minilibx -fsanitize=address minilibx/libmlx.a
+FLAGS = -Wall -Werror -Wextra -O3 -g3 #-fsanitize=address#-fsanitize=undefined
+MLXFLAG = -l mlx -framework OpenGL -framework AppKit -L minilibx  minilibx/libmlx.a #-fsanitize=address
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃									RULES                                     ┃

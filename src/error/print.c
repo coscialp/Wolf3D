@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/10 18:31:39 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/31 13:57:51 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/07 12:36:40 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,4 +28,6 @@ void	print_params(t_cub3d *c)
 	ft_dprintf(2, "pos_x:\t\t%f\n", c->player.pos_x);
 	ft_dprintf(2, "dirX:\t\t%f\n", c->player.dir.x);
 	ft_dprintf(2, "dirY:\t\t%f\n", c->player.dir.y);
+	ft_dprintf(2, "posSprite.x:\t%f\n", c->sprite[0].x);
+	ft_dprintf(2, "posSprite.y:\t%f\n", c->sprite[0].y);
 }

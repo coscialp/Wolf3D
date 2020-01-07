@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/06 17:43:21 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/07 19:48:00 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -114,6 +114,30 @@ typedef struct	s_image
 	int			*ptr;
 }				t_image;
 
+typedef struct	s_bpm
+{
+	unsigned char	bitmap_type[2];
+	int				file_size;
+	short			reserved1;
+	short			reserved2;
+	unsigned int	offset_bits;
+}				t_bpm;
+
+typedef struct	s_bpm2
+{
+	unsigned int	size_header;
+	unsigned int	width;
+	unsigned int	height;
+	short int		planes;
+	short int		bit_count;
+	unsigned int	compression;
+	unsigned int	image_size;
+	unsigned int	ppm_x;
+	unsigned int	ppm_y;
+	unsigned int	clr_used;
+	unsigned int	clr_important;
+}				t_bpm2;
+
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 **┃								struct player                                 ┃
@@ -140,9 +164,23 @@ typedef struct	s_sprite
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
+typedef	struct s_floor
+{
+	int			curr_pos_y;
+	double		pos_z;
+	double		row;
+	t_vector	cell;
+	t_vector	floor;
+	t_vector	step;
+	t_vector	ray0;
+	t_vector	ray1;
+}				t_floor;
+
+
 typedef struct	s_cub3d
 {
 	char		move;
+	char		move_lat;
 	char		move_y;
 	char		rotate;
 	int			map_x;
@@ -172,8 +210,8 @@ typedef struct	s_cub3d
 	double		*zbuffer;
 	double		*sprite_dist;
 	double		inv_correc;
-	t_vector	sprite_start;
-	t_vector	sprite_end;
+	t_pos		sprite_start;
+	t_pos		sprite_end;
 	t_vector	transform;
 	t_vector	old_plane;
 	t_vector	old_dir;
@@ -187,6 +225,7 @@ typedef struct	s_cub3d
 	t_image		img;
 	t_image		tex[5];
 	t_sprite	*sprite;
+	t_floor		floor;
 }				t_cub3d;
 
 /*
@@ -250,6 +289,12 @@ int				key_release(int keycode, t_cub3d *c);
 void			rotate(t_cub3d *c, char rotate);
 void			move_camera(t_cub3d *c, char orientation);
 void			move_y_camera(t_cub3d *c, char orientation);
+void			move_lat_camera(t_cub3d *c, char orientation);
+void			icanmove_y_lat(t_cub3d *c, char orientation);
+void			icanmove_x_lat(t_cub3d *c, char orientation);
+void			icanmove_y(t_cub3d *c, char orientation);
+void			icanmove_x(t_cub3d *c, char orientation);
+void			save_bitmap(const char *filename, t_cub3d *c);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -262,5 +307,6 @@ int				wall_orientation(t_vector ray, t_cub3d *c);
 int				sprite_casting(t_cub3d *c);
 void			draw(t_cub3d *c, int x);
 void			raycast_sprite(t_cub3d *c);
+void			raycast_floor(t_cub3d *c);
 
 #endif
