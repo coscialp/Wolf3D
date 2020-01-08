@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/08 19:03:23 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 19:13:23 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 22:10:22 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -74,7 +74,7 @@ int		sprite_casting2(t_cub3d *c)
 	}
 	sort_sprite2(c);
 	i = -1;
-	while (++i < c->data.num_sprite)
+	while (++i < c->data.num_sprite2)
 	{
 		math_sprite2(c, i);
 		c->sprite_start.x = -c->sprite_width / 2 + c->sprite_screen;
@@ -83,7 +83,7 @@ int		sprite_casting2(t_cub3d *c)
 		c->sprite_end.x = c->sprite_width / 2 + c->sprite_screen;
 		if (c->sprite_end.x >= c->data.res_x)
 			c->sprite_end.x = c->data.res_x - 1;
-		draw_sprite(c);
+		draw_sprite(c, 7);
 	}
 	return (0);
 }
@@ -92,8 +92,8 @@ void	raycast_sprite2(t_cub3d *c)
 {
 	if (!(c->zbuffer2 = malloc(sizeof(double) * c->data.res_x)))
 		ft_exit(c);
-	if (!(c->sprite_order2 = malloc(sizeof(int) * c->data.num_sprite)))
+	if (!(c->sprite_order2 = malloc(sizeof(int) * c->data.num_sprite2)))
 		ft_exit(c);
-	if (!(c->sprite_dist2 = malloc(sizeof(double) * c->data.num_sprite)))
+	if (!(c->sprite_dist2 = malloc(sizeof(double) * c->data.num_sprite2)))
 		ft_exit(c);
 }

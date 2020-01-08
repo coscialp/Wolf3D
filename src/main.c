@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 19:07:46 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 22:06:18 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,6 +21,10 @@ void	ft_exit_sucess(t_cub3d *c)
 	free(c->sprite_order);
 	free(c->sprite_dist);
 	free(c->zbuffer);
+	free(c->sprite2);
+	free(c->sprite_order2);
+	free(c->sprite_dist2);
+	free(c->zbuffer2);
 	ft_free_tab(c->map.map_2d);
 	free(c);
 	exit(EXIT_SUCCESS);
@@ -85,6 +89,8 @@ void	init_windows(t_cub3d *c)
 	&c->img.size_line, &c->img.endian);
 	loading_all_tex(c);
 	c->move_cam = 0;
+	c->sprite = malloc(sizeof(t_sprite));
+	c->sprite2 = malloc(sizeof(t_sprite));
 	raycast_sprite(c);
 	raycast_sprite2(c);
 }

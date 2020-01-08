@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/06 13:08:23 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 19:11:05 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 22:03:51 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@ int		parsing_sprite(t_cub3d *c)
 	i = 0;
 	pos.x = 0;
 	pos.y = 0;
-	// free(c->sprite);
+	free(c->sprite);
 	// free(c->sprite2);
 	if (!(c->sprite = ft_memalloc(sizeof(t_sprite) * c->data.num_sprite)))
 		ft_exit(c);
