@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/12/09 15:43:33 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2020/01/08 19:06:12 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/08 23:52:25 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -113,8 +113,8 @@ SINC = $(addprefix $(INC_PATH), $(SINC_NAME))
 # ┃									FLAG                                      ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-FLAGS = -Wall -Werror -Wextra -O3 -g3 -fsanitize=address#-fsanitize=undefined
-MLXFLAG = -l mlx -framework OpenGL -framework AppKit -L minilibx  minilibx/libmlx.a -fsanitize=address
+FLAGS = -Wall -Werror -Wextra -O3 -g3 #-fsanitize=address#-fsanitize=undefined
+MLXFLAG = -l mlx -framework OpenGL -framework AppKit -L minilibx  minilibx/libmlx.a #-fsanitize=address
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃									RULES                                     ┃
