@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/07 19:27:35 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 19:07:46 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,9 +62,12 @@ int		main_loop(t_cub3d *c)
 		move_lat_camera(c, c->move_lat);
 	if (c->move_y)
 		move_y_camera(c, c->move_y);
-	raycast_floor(c);
+	if (c->player.life > 100)
+		c->player.life = 100;
+	parsing_sprite(c);
 	raycast(c);
-	mlx_clear_window(c->data.ptrwin, c->data.win);
+	if (c->data.res_x >= 800 && c->data.res_y >= 600)
+		draw_hud(c);
 	mlx_put_image_to_window(c->data.ptrwin, c->data.win, c->img.img, 0, 0);
 	return (0);
 }
@@ -81,8 +84,9 @@ void	init_windows(t_cub3d *c)
 	c->img.ptr = (int *)mlx_get_data_addr(c->img.img, &c->img.bpp,
 	&c->img.size_line, &c->img.endian);
 	loading_all_tex(c);
-	load_tex_sprite(c);
 	c->move_cam = 0;
+	raycast_sprite(c);
+	raycast_sprite2(c);
 }
 
 int		main(int ac, char **av)
@@ -99,7 +103,6 @@ int		main(int ac, char **av)
 			print_params(c);
 		init_plane(c);
 		init_windows(c);
-		raycast_sprite(c);
 		if (ac == 3 && !ft_strcmp(av[ac - 1], "-save"))
 		{
 			raycast(c);

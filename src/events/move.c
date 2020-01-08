@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/02 12:53:46 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/07 15:33:15 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 14:39:59 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,7 @@ void	move_lat_camera(t_cub3d *c, char orientation)
 	if (orientation == 'R')
 	{
 		c->player.pos_x += c->data.plane.x * c->movspeed;
-		icanmove_x_lat(c, orientation);	
+		icanmove_x_lat(c, orientation);
 		c->player.pos_y += c->data.plane.y * c->movspeed;
 	}
 	else if (orientation == 'L')

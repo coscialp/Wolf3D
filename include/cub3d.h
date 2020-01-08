@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/07 19:48:00 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 19:06:45 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,6 +55,7 @@ typedef struct	s_data
 	int				col_floor;
 	int				col_ceil;
 	int				num_sprite;
+	int				num_sprite2;
 	char			*north_texture;
 	char			*south_texture;
 	char			*west_texture;
@@ -147,12 +148,14 @@ typedef struct	s_bpm2
 typedef struct	s_player
 {
 	t_vector	dir;
+	int			life;
 	double		pos_x;
 	double		pos_y;
 }				t_player;
 
 typedef struct	s_sprite
 {
+	int			type;
 	double		x;
 	double		y;
 	t_image		tex;
@@ -163,19 +166,6 @@ typedef struct	s_sprite
 **┃								struct cub3D                                  ┃
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
-
-typedef	struct s_floor
-{
-	int			curr_pos_y;
-	double		pos_z;
-	double		row;
-	t_vector	cell;
-	t_vector	floor;
-	t_vector	step;
-	t_vector	ray0;
-	t_vector	ray1;
-}				t_floor;
-
 
 typedef struct	s_cub3d
 {
@@ -196,6 +186,7 @@ typedef struct	s_cub3d
 	int			tex_y;
 	int			direction;
 	int			*sprite_order;
+	int			*sprite_order2;
 	int			sneak;
 	int			move_cam;
 	int			sprite_screen;
@@ -208,7 +199,9 @@ typedef struct	s_cub3d
 	double		rotspeed;
 	double		wall_pos;
 	double		*zbuffer;
+	double		*zbuffer2;
 	double		*sprite_dist;
+	double		*sprite_dist2;
 	double		inv_correc;
 	t_pos		sprite_start;
 	t_pos		sprite_end;
@@ -223,9 +216,10 @@ typedef struct	s_cub3d
 	t_color		color;
 	t_player	player;
 	t_image		img;
-	t_image		tex[5];
+	t_image		tex[8];
+	t_image		weapons[2];
 	t_sprite	*sprite;
-	t_floor		floor;
+	t_sprite	*sprite2;
 }				t_cub3d;
 
 /*
@@ -282,6 +276,8 @@ t_color			init_color(void);
 */
 
 void			ft_exit_sucess(t_cub3d *c);
+void			draw_hud(t_cub3d *c);
+void			draw_weapons(t_cub3d *c, int i);
 void			draw_sprite(t_cub3d *c);
 int				close_prgm(t_cub3d *c);
 int				key_press(int keycode, t_cub3d *c);
@@ -305,8 +301,9 @@ void			save_bitmap(const char *filename, t_cub3d *c);
 int				raycast(t_cub3d *c);
 int				wall_orientation(t_vector ray, t_cub3d *c);
 int				sprite_casting(t_cub3d *c);
+int				sprite_casting2(t_cub3d *c);
 void			draw(t_cub3d *c, int x);
 void			raycast_sprite(t_cub3d *c);
-void			raycast_floor(t_cub3d *c);
+void			raycast_sprite2(t_cub3d *c);
 
 #endif

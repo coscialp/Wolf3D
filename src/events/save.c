@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/07 17:39:12 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/07 18:16:13 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 14:40:59 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@ void	bitmap_image(t_cub3d *c, int fd, t_bpm2 bih)
 	int				y;
 	int				ble;
 	unsigned char	color[3];
-	
+
 	write(fd, &bih, sizeof(bih));
 	y = c->data.res_y - 1;
 	while (y >= 0)
@@ -45,7 +45,7 @@ void	save_bitmap(const char *filename, t_cub3d *c)
 	int			fd;
 	t_bpm		bfh;
 	t_bpm2		bih;
-	
+
 	ft_memcpy(&bfh.bitmap_type, "BM", 2);
 	bfh.file_size = c->data.res_x * c->data.res_y * 4 + 54;
 	bfh.reserved1 = 0;

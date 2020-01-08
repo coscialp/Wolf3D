@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/06 13:08:23 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/07 12:17:13 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 19:11:05 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,10 +17,16 @@ int		parsing_sprite(t_cub3d *c)
 {
 	int			i;
 	int			j;
-	static int	pos = 0;
+	t_pos		pos;
 
 	i = 0;
-	if (!(c->sprite = malloc(sizeof(t_sprite) * c->data.num_sprite)))
+	pos.x = 0;
+	pos.y = 0;
+	// free(c->sprite);
+	// free(c->sprite2);
+	if (!(c->sprite = ft_memalloc(sizeof(t_sprite) * c->data.num_sprite)))
+		ft_exit(c);
+	if (!(c->sprite2 = ft_memalloc(sizeof(t_sprite) * c->data.num_sprite2)))
 		ft_exit(c);
 	while (c->map.map_2d[i])
 	{
@@ -29,9 +35,15 @@ int		parsing_sprite(t_cub3d *c)
 		{
 			if (c->map.map_2d[i][j] == '2')
 			{
-				c->sprite[pos].x = i + 0.5;
-				c->sprite[pos].y = j + 0.5;
-				pos++;
+				c->sprite[pos.x].x = i + 0.5;
+				c->sprite[pos.x].y = j + 0.5;
+				pos.x++;
+			}
+			else if (c->map.map_2d[i][j] == '3')
+			{
+				c->sprite2[pos.y].x = i + 0.5;
+				c->sprite2[pos.y].y = j + 0.5;
+				pos.y++;
 			}
 			j++;
 		}

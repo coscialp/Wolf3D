@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/06 13:10:17 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/07 18:00:41 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 19:05:54 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -85,7 +85,7 @@ int		sprite_casting(t_cub3d *c)
 			c->sprite_end.x = c->data.res_x - 1;
 		draw_sprite(c);
 	}
-	return (0);
+	return (sprite_casting2(c));
 }
 
 void	raycast_sprite(t_cub3d *c)
