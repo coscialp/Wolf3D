@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 22:06:18 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 23:38:46 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,6 +68,11 @@ int		main_loop(t_cub3d *c)
 		move_y_camera(c, c->move_y);
 	if (c->player.life > 100)
 		c->player.life = 100;
+	else if (c->player.life <= 0)
+	{
+		ft_dprintf(1, "You are DEAD !\n");
+		close_prgm(c);
+	}
 	parsing_sprite(c);
 	raycast(c);
 	if (c->data.res_x >= 800 && c->data.res_y >= 600)
