@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/06 13:08:23 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 11:31:59 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 12:55:34 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,7 @@ static void	sprite_parser(t_cub3d *c, int i, int j, t_pos *pos)
 		c->sprite[pos->x].y = j + 0.5;
 		pos->x += 1;
 	}
-	else if (c->map.map_2d[i][j] == '3')
+	else if (c->map.map_2d[i][j] == '3' || c->map.map_2d[i][j] == '4')
 	{
 		c->sprite2[pos->y].x = i + 0.5;
 		c->sprite2[pos->y].y = j + 0.5;

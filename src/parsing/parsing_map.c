@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/03 19:00:10 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 18:56:52 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 12:55:42 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -54,11 +54,12 @@ int		check_map(t_map *map, int i, int j, t_cub3d *c)
 		init_player(c, map->map_2d[i][j], i, j);
 	}
 	else if (map->map_2d[i][j] != '0' && map->map_2d[i][j] != '1' &&
-	map->map_2d[i][j] != '2' && map->map_2d[i][j] != '3')
+	map->map_2d[i][j] != '2' && map->map_2d[i][j] != '3' &&
+	map->map_2d[i][j] != '4')
 		return (msg_error("map"));
 	if (map->map_2d[i][j] == '2')
 		c->data.num_sprite += 1;
-	else if (map->map_2d[i][j] == '3')
+	else if (map->map_2d[i][j] == '3' || map->map_2d[i][j] == '4')
 		c->data.num_sprite2 += 1;
 	return (1);
 }
