@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/10 18:32:44 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 16:47:57 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 11:24:03 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,10 +20,6 @@ void	ft_exit(t_cub3d *c)
 	ft_strdel(&c->map.map_1d);
 	if (c->map.map_2d)
 		ft_free_tab(c->map.map_2d);
-	// free(c->sprite);
-	// free(c->sprite_order);
-	// free(c->sprite_dist);
-	// free(c->zbuffer);
 	free(c);
 	exit(EXIT_FAILURE);
 }

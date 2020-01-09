@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/08 19:03:23 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 22:10:22 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 11:43:38 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,17 +59,15 @@ void	math_sprite2(t_cub3d *c, int i)
 	c->sprite_width = ft_abs((int)(c->data.res_y / (c->transform.y)));
 }
 
-int		sprite_casting2(t_cub3d *c)
+int		sprite_casting2(t_cub3d *c, int i)
 {
-	int	i;
-
-	i = 0;
 	while (i < c->data.num_sprite2)
 	{
 		c->sprite_order2[i] = i;
 		c->sprite_dist2[i] = (c->player.pos_x - c->sprite2[i].x) *
 		(c->player.pos_x - c->sprite2[i].x) +
-		(c->player.pos_y - c->sprite2[i].y) * (c->player.pos_y - c->sprite2[i].y);
+		(c->player.pos_y - c->sprite2[i].y) *
+		(c->player.pos_y - c->sprite2[i].y);
 		i++;
 	}
 	sort_sprite2(c);

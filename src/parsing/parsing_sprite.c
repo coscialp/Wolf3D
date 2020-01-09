@@ -6,14 +6,30 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/06 13:08:23 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 23:54:10 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 11:31:59 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		parsing_sprite(t_cub3d *c)
+static void	sprite_parser(t_cub3d *c, int i, int j, t_pos *pos)
+{
+	if (c->map.map_2d[i][j] == '2')
+	{
+		c->sprite[pos->x].x = i + 0.5;
+		c->sprite[pos->x].y = j + 0.5;
+		pos->x += 1;
+	}
+	else if (c->map.map_2d[i][j] == '3')
+	{
+		c->sprite2[pos->y].x = i + 0.5;
+		c->sprite2[pos->y].y = j + 0.5;
+		pos->y += 1;
+	}
+}
+
+int			parsing_sprite(t_cub3d *c)
 {
 	int			i;
 	int			j;
@@ -33,18 +49,7 @@ int		parsing_sprite(t_cub3d *c)
 		j = 0;
 		while (c->map.map_2d[i][j])
 		{
-			if (c->map.map_2d[i][j] == '2')
-			{
-				c->sprite[pos.x].x = i + 0.5;
-				c->sprite[pos.x].y = j + 0.5;
-				pos.x++;
-			}
-			else if (c->map.map_2d[i][j] == '3')
-			{
-				c->sprite2[pos.y].x = i + 0.5;
-				c->sprite2[pos.y].y = j + 0.5;
-				pos.y++;
-			}
+			sprite_parser(c, i, j, &pos);
 			j++;
 		}
 		i++;

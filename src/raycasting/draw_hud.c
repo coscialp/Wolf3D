@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/08 13:09:33 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 23:28:51 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 11:47:45 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -87,48 +87,6 @@ void	draw_weapons(t_cub3d *c, int i)
 		}
 		x++;
 		tex.x++;
-	}
-}
-
-void	draw_lifebar(t_cub3d *c)
-{
-	int		width_lifebar;
-	int		start;
-	int		x;
-	int		color;
-	int		temp_start;
-	double	percentage;
-
-	x = c->data.res_y - 60;
-	start = c->data.res_x / 4;
-	temp_start = start;
-	width_lifebar = c->data.res_x / 2;
-	percentage = (width_lifebar / 100.0) * (100.0 - c->player.life);
-
-	while (x < c->data.res_y)
-	{
-		start = (c->data.res_x / 4) - 10;
-		while (start < width_lifebar + temp_start + 10)
-		{
-			c->img.ptr[x * c->data.res_x + start] = 0;
-			start++;
-		}
-		x++;
-	}
-	x = c->data.res_y - 50;
-	if (c->player.life < 50)
-		color = 0xddff00;
-	else
-		color = 0x00ff00;
-	while (x < c->data.res_y - 10)
-	{
-		start = c->data.res_x / 4;
-		while (start < (width_lifebar + temp_start) - percentage)
-		{
-			c->img.ptr[x * c->data.res_x + start] = color;
-			start++;
-		}
-		x++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 22:10:45 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 12:04:00 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -97,6 +97,16 @@ typedef union	u_color
 	int				color;
 	t_rgba			rgba;
 }				t_color;
+
+typedef struct	s_lifebar
+{
+	int		width_lifebar;
+	int		start;
+	int		x;
+	int		color;
+	int		temp_start;
+	double	percentage;
+}				t_lifebar;
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -192,6 +202,7 @@ typedef struct	s_cub3d
 	int			sprite_screen;
 	int			sprite_height;
 	int			sprite_width;
+	int			stripe;
 	double		step;
 	double		tex_pos;
 	double		cam_x;
@@ -290,6 +301,8 @@ void			icanmove_y_lat(t_cub3d *c, char orientation);
 void			icanmove_x_lat(t_cub3d *c, char orientation);
 void			icanmove_y(t_cub3d *c, char orientation);
 void			icanmove_x(t_cub3d *c, char orientation);
+void			itsanobject_ud(t_cub3d *c, char orientation);
+void			itsanobject_rd(t_cub3d *c, char orientation);
 void			save_bitmap(const char *filename, t_cub3d *c);
 
 /*
@@ -301,8 +314,9 @@ void			save_bitmap(const char *filename, t_cub3d *c);
 int				raycast(t_cub3d *c);
 int				wall_orientation(t_vector ray, t_cub3d *c);
 int				sprite_casting(t_cub3d *c);
-int				sprite_casting2(t_cub3d *c);
+int				sprite_casting2(t_cub3d *c, int i);
 void			draw(t_cub3d *c, int x);
+void			draw_lifebar(t_cub3d *c);
 void			raycast_sprite(t_cub3d *c);
 void			raycast_sprite2(t_cub3d *c);
 
