@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/11 10:52:05 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/07 15:15:27 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 13:15:08 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,5 +61,7 @@ int		key_release(int keycode, t_cub3d *c)
 		c->move_y = 0;
 	else if (keycode == SPACE)
 		c->movspeed = 0.075;
+	else if (keycode == SHIFT)
+		destroy_wall(c);
 	return (1);
 }

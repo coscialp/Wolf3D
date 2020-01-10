@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 12:04:00 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 13:11:07 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -287,6 +287,7 @@ t_color			init_color(void);
 */
 
 void			ft_exit_sucess(t_cub3d *c);
+void			destroy_wall(t_cub3d *c);
 void			draw_hud(t_cub3d *c);
 void			draw_weapons(t_cub3d *c, int i);
 void			draw_sprite(t_cub3d *c, int i);

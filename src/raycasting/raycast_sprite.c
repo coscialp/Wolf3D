@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/06 13:10:17 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 11:43:47 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 10:56:14 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -102,5 +102,5 @@ int		wall_orientation(t_vector ray, t_cub3d *c)
 {
 	if (c->side)
 		return (ray.y < 0 ? 3 : 2);
-	return (ray.x < 0 ? 0 : 1);
+	return (ray.x < 0 ? 1 : 0);
 }

@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/02 11:48:31 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 11:46:03 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 17:34:36 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,16 +16,27 @@
 void	draw_wall(t_cub3d *c, int x)
 {
 	int		y;
-	int		color;
+	double	coef;
+	t_color	color;
 
 	y = c->draw_start;
 	while (y < c->draw_end)
 	{
 		c->tex_y = (int)c->tex_pos & (c->tex[c->direction].height - 1);
 		c->tex_pos += c->step;
-		color = c->tex[c->direction].ptr[c->tex_y *
+		color.color = c->tex[c->direction].ptr[c->tex_y *
 		c->tex[c->direction].width + c->tex_x];
-		c->img.ptr[y * c->data.res_x + x] = color;
+		coef = c->zbuffer[x] < 25 ? 1 - c->zbuffer[x] / 25 : 0;
+		if (c->side == 0)
+		{
+			color.rgba.r *= 0.7;
+			color.rgba.g *= 0.7;
+			color.rgba.b *= 0.7;
+		}
+		color.rgba.r *= coef;
+		color.rgba.g *= coef;
+		color.rgba.b *= coef;
+		c->img.ptr[y * c->data.res_x + x] = color.color;
 		y++;
 	}
 }
@@ -33,23 +44,37 @@ void	draw_wall(t_cub3d *c, int x)
 void	draw_floor(t_cub3d *c, int x)
 {
 	int		y;
+	double	coef;
+	t_color	color;
 
-	y = c->draw_end;
-	while (y < c->data.res_y)
+	y = c->data.res_y - 1;
+	while (y >= c->draw_end)
 	{
-		c->img.ptr[y * c->data.res_x + x] = c->data.col_floor;
-		y++;
+		coef = y - (c->data.res_y / 2) > ((c->data.res_y / 2) / 2) ? (1 - (y - (c->data.res_y / 2)) / ((c->data.res_y / 2) / 2)) : 0;
+		color.color = c->data.col_floor;
+		color.rgba.r *= coef;
+		color.rgba.g *= coef;
+		color.rgba.b *= coef;
+		c->img.ptr[y * c->data.res_x + x] = color.color;
+		y--;
 	}
 }
 
 void	draw_ceilling(t_cub3d *c, int x)
 {
 	int		y;
+	double	coef;
+	t_color	color;
 
 	y = 0;
 	while (y < c->draw_start)
 	{
-		c->img.ptr[y * c->data.res_x + x] = c->data.col_ceil;
+		coef = ((c->data.res_y / 2) + c->move_cam - y) < (c->data.res_y / 2) ? (1 - ((c->data.res_y / 2) + c->move_cam - y) / 11) : 1;
+		color.color = c->data.col_ceil;
+		color.rgba.r *= coef;
+		color.rgba.g *= coef;
+		color.rgba.b *= coef;
+		c->img.ptr[y * c->data.res_x + x] = color.color;
 		y++;
 	}
 }

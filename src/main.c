@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 23:38:46 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 16:02:06 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -116,6 +116,7 @@ int		main(int ac, char **av)
 		init_windows(c);
 		if (ac == 3 && !ft_strcmp(av[ac - 1], "-save"))
 		{
+			parsing_sprite(c);
 			raycast(c);
 			save_bitmap("save.bmp", c);
 			close_prgm(c);
