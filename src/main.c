@@ -6,25 +6,37 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 16:02:06 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/13 18:12:17 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	init_windows(t_cub3d *c)
+{
+	if (!(c->data.ptrwin = mlx_init()))
+		ft_exit(c);
+	if (!(c->data.win = mlx_new_window(c->data.ptrwin,
+	c->data.res_x, c->data.res_y, "Cub3D")))
+		ft_exit(c);
+	c->img.img = mlx_new_image(c->data.ptrwin,
+	c->data.res_x, c->data.res_y);
+	c->img.ptr = (int *)mlx_get_data_addr(c->img.img, &c->img.bpp,
+	&c->img.size_line, &c->img.endian);
+	loading_all_tex(c);
+	c->move_cam = 0;
+	c->sprite = malloc(sizeof(t_sprite));
+	if (!(c->zbuffer = malloc(sizeof(double) * c->data.res_x)))
+		ft_exit(c);
+}
+
 void	ft_exit_sucess(t_cub3d *c)
 {
 	close(c->data.fd);
 	ft_free_struct(c->data);
 	free(c->sprite);
-	free(c->sprite_order);
-	free(c->sprite_dist);
 	free(c->zbuffer);
-	free(c->sprite2);
-	free(c->sprite_order2);
-	free(c->sprite_dist2);
-	free(c->zbuffer2);
 	ft_free_tab(c->map.map_2d);
 	free(c);
 	exit(EXIT_SUCCESS);
@@ -54,6 +66,7 @@ void	init_plane(t_cub3d *c)
 	}
 	c->movspeed = 0.075;
 	c->rotspeed = 0.04;
+	init_windows(c);
 }
 
 int		main_loop(t_cub3d *c)
@@ -81,25 +94,6 @@ int		main_loop(t_cub3d *c)
 	return (0);
 }
 
-void	init_windows(t_cub3d *c)
-{
-	if (!(c->data.ptrwin = mlx_init()))
-		ft_exit(c);
-	if (!(c->data.win = mlx_new_window(c->data.ptrwin,
-	c->data.res_x, c->data.res_y, "Cub3D")))
-		ft_exit(c);
-	c->img.img = mlx_new_image(c->data.ptrwin,
-	c->data.res_x, c->data.res_y);
-	c->img.ptr = (int *)mlx_get_data_addr(c->img.img, &c->img.bpp,
-	&c->img.size_line, &c->img.endian);
-	loading_all_tex(c);
-	c->move_cam = 0;
-	c->sprite = malloc(sizeof(t_sprite));
-	c->sprite2 = malloc(sizeof(t_sprite));
-	raycast_sprite(c);
-	raycast_sprite2(c);
-}
-
 int		main(int ac, char **av)
 {
 	t_cub3d	*c;
@@ -110,10 +104,9 @@ int		main(int ac, char **av)
 		if (parsing_name(av[1]) == -1)
 			ft_exit(c);
 		parsing_core(c);
-		if (ac == 3 && !ft_strcmp(av[ac - 1], "display"))
+		if (ac == 3 && !ft_strcmp(av[ac - 1], "-display"))
 			print_params(c);
 		init_plane(c);
-		init_windows(c);
 		if (ac == 3 && !ft_strcmp(av[ac - 1], "-save"))
 		{
 			parsing_sprite(c);

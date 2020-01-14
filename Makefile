@@ -6,7 +6,7 @@
 #    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/12/09 15:43:33 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2020/01/09 11:47:58 by coscialp    ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/13 17:11:26 by coscialp    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -70,7 +70,7 @@ EVSRC_NAME = key_event.c other_event.c move.c icanmove.c save.c itsanobject.c
 
 RINC_NAME = cub3d.h
 RSRC_NAME = raycast.c draw.c draw_sprite.c raycast_sprite.c draw_hud.c\
-			raycast_sprite2.c draw_lifebar.c
+			draw_lifebar.c
 
 SINC_NAME = cub3d.h
 SSRC_NAME = handler_struct.c

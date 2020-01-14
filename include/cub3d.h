@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 13:11:07 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/13 18:11:59 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -168,6 +168,7 @@ typedef struct	s_sprite
 	int			type;
 	double		x;
 	double		y;
+	double		dist;
 	t_image		tex;
 }				t_sprite;
 
@@ -195,8 +196,6 @@ typedef struct	s_cub3d
 	int			tex_x;
 	int			tex_y;
 	int			direction;
-	int			*sprite_order;
-	int			*sprite_order2;
 	int			sneak;
 	int			move_cam;
 	int			sprite_screen;
@@ -210,9 +209,6 @@ typedef struct	s_cub3d
 	double		rotspeed;
 	double		wall_pos;
 	double		*zbuffer;
-	double		*zbuffer2;
-	double		*sprite_dist;
-	double		*sprite_dist2;
 	double		inv_correc;
 	t_pos		sprite_start;
 	t_pos		sprite_end;
@@ -227,10 +223,9 @@ typedef struct	s_cub3d
 	t_color		color;
 	t_player	player;
 	t_image		img;
-	t_image		tex[8];
+	t_image		tex[9];
 	t_image		weapons[2];
 	t_sprite	*sprite;
-	t_sprite	*sprite2;
 }				t_cub3d;
 
 /*

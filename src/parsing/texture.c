@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/02 18:11:03 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 18:56:05 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/13 17:27:04 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -54,6 +54,7 @@ void	loading_all_tex(t_cub3d *c)
 	load_texture(c, "./texture/hud_up.xpm");
 	load_texture(c, "./texture/hud_800p.xpm");
 	load_texture(c, c->data.sprite_texture);
+	load_texture(c, "./textures/sprite_1.xpm");
 	load_texture(c, "./textures/sprite_1.xpm");
 	load_weapons_tex(c, "./texture/gun.xpm");
 	load_weapons_tex(c, "./texture/gun_320p.xpm");

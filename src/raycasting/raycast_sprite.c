@@ -6,40 +6,36 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/06 13:10:17 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 10:56:14 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/13 18:15:30 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	sort_sprite(t_cub3d *c)
+static void	sort_sprite(t_cub3d *c)
 {
-	int		i;
-	int		buff;
-	double	dbuf;
+	int			i;
+	t_sprite	dbuf;
 
 	i = 0;
 	while (i < c->data.num_sprite - 1)
 	{
 		i++;
-		if (c->sprite_dist[i - 1] < c->sprite_dist[i])
+		if (c->sprite[i - 1].dist < c->sprite[i].dist)
 		{
-			dbuf = c->sprite_dist[i - 1];
-			c->sprite_dist[i - 1] = c->sprite_dist[i];
-			c->sprite_dist[i] = dbuf;
-			buff = c->sprite_order[i - 1];
-			c->sprite_order[i - 1] = c->sprite_order[i];
-			c->sprite_order[i] = buff;
+			dbuf = c->sprite[i - 1];
+			c->sprite[i - 1] = c->sprite[i];
+			c->sprite[i] = dbuf;
 			i = 0;
 		}
 	}
 }
 
-void	math_sprite(t_cub3d *c, int i)
+static void	math_sprite(t_cub3d *c, int i)
 {
-	c->sprite_pos.x = c->sprite[c->sprite_order[i]].x - c->player.pos_x;
-	c->sprite_pos.y = c->sprite[c->sprite_order[i]].y - c->player.pos_y;
+	c->sprite_pos.x = c->sprite[i].x - c->player.pos_x;
+	c->sprite_pos.y = c->sprite[i].y - c->player.pos_y;
 	c->inv_correc = 1.0 / ((c->data.plane.x * c->player.dir.y)
 	- (c->player.dir.x * c->data.plane.y));
 	c->transform.x = c->inv_correc * ((c->player.dir.y * c->sprite_pos.x)
@@ -66,8 +62,7 @@ int		sprite_casting(t_cub3d *c)
 	i = 0;
 	while (i < c->data.num_sprite)
 	{
-		c->sprite_order[i] = i;
-		c->sprite_dist[i] = (c->player.pos_x - c->sprite[i].x) *
+		c->sprite[i].dist = (c->player.pos_x - c->sprite[i].x) *
 		(c->player.pos_x - c->sprite[i].x) +
 		(c->player.pos_y - c->sprite[i].y) * (c->player.pos_y - c->sprite[i].y);
 		i++;
@@ -83,19 +78,9 @@ int		sprite_casting(t_cub3d *c)
 		c->sprite_end.x = c->sprite_width / 2 + c->sprite_screen;
 		if (c->sprite_end.x >= c->data.res_x)
 			c->sprite_end.x = c->data.res_x - 1;
-		draw_sprite(c, 6);
+		draw_sprite(c, c->sprite[i].type);
 	}
-	return (sprite_casting2(c, 0));
-}
-
-void	raycast_sprite(t_cub3d *c)
-{
-	if (!(c->zbuffer = malloc(sizeof(double) * c->data.res_x)))
-		ft_exit(c);
-	if (!(c->sprite_order = malloc(sizeof(int) * c->data.num_sprite)))
-		ft_exit(c);
-	if (!(c->sprite_dist = malloc(sizeof(double) * c->data.num_sprite)))
-		ft_exit(c);
+	return (0);
 }
 
 int		wall_orientation(t_vector ray, t_cub3d *c)

@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/02 11:48:31 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 17:34:36 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/13 11:58:43 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,13 +44,15 @@ void	draw_wall(t_cub3d *c, int x)
 void	draw_floor(t_cub3d *c, int x)
 {
 	int		y;
+	int		dist;
 	double	coef;
 	t_color	color;
 
 	y = c->data.res_y - 1;
 	while (y >= c->draw_end)
 	{
-		coef = y - (c->data.res_y / 2) > ((c->data.res_y / 2) / 2) ? (1 - (y - (c->data.res_y / 2)) / ((c->data.res_y / 2) / 2)) : 0;
+		dist = y - ((c->data.res_y / 2) + c->move_cam);
+		coef = dist < 300 ? (double)dist / 300.0 : 1.0;
 		color.color = c->data.col_floor;
 		color.rgba.r *= coef;
 		color.rgba.g *= coef;
@@ -63,13 +65,15 @@ void	draw_floor(t_cub3d *c, int x)
 void	draw_ceilling(t_cub3d *c, int x)
 {
 	int		y;
+	int		dist;
 	double	coef;
 	t_color	color;
 
 	y = 0;
 	while (y < c->draw_start)
 	{
-		coef = ((c->data.res_y / 2) + c->move_cam - y) < (c->data.res_y / 2) ? (1 - ((c->data.res_y / 2) + c->move_cam - y) / 11) : 1;
+		dist = (c->data.res_y / 2) + c->move_cam - y;
+		coef = dist < 300 ? (double)dist / 300.0 : 1.0;
 		color.color = c->data.col_ceil;
 		color.rgba.r *= coef;
 		color.rgba.g *= coef;
