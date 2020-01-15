@@ -3,7 +3,7 @@ R 1920 1080
 NO ./texture/4k.xpm
 SO ./texture/4k.xpm
 WE ./texture/4k.xpm
-EA ./texture/4k.xpm
+EA ./textures/wood.xpm
 S ./texture/heart.xpm
 
 F 255,0,36

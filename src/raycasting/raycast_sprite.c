@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/06 13:10:17 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 18:15:30 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/15 11:30:50 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,7 +55,7 @@ static void	math_sprite(t_cub3d *c, int i)
 	c->sprite_width = ft_abs((int)(c->data.res_y / (c->transform.y)));
 }
 
-int		sprite_casting(t_cub3d *c)
+int			sprite_casting(t_cub3d *c)
 {
 	int	i;
 
@@ -83,7 +83,7 @@ int		sprite_casting(t_cub3d *c)
 	return (0);
 }
 
-int		wall_orientation(t_vector ray, t_cub3d *c)
+int			wall_orientation(t_vector ray, t_cub3d *c)
 {
 	if (c->side)
 		return (ray.y < 0 ? 3 : 2);

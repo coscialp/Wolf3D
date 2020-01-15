@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/08 13:09:33 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 11:47:45 by coscialp    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/15 11:28:53 by coscialp    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -92,11 +92,11 @@ void	draw_weapons(t_cub3d *c, int i)
 
 void	draw_hud(t_cub3d *c)
 {
-	if (c->data.res_x < 1680 && c->data.res_y < 925)
+	if (c->data.res_x < 1680 || c->data.res_y < 925)
 		draw_hud_800p(c);
 	else if (c->data.res_x >= 1680 && c->data.res_y >= 925)
 		draw_hud_up(c);
-	if (c->data.res_x < 1680 && c->data.res_y < 925)
+	if (c->data.res_x < 1680 || c->data.res_y < 925)
 		draw_weapons(c, 1);
 	else if (c->data.res_x >= 1680 && c->data.res_y >= 925)
 		draw_weapons(c, 0);
