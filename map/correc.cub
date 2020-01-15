@@ -1,8 +1,8 @@
 R 1920 1080
 
 NO ./textures/wood.xpm
-SO ./textures/wall_4.xpm
-WE ./textures/wall_3.xpm
+SO ./textures/bluestone.xpm
+WE ./textures/purplestone.xpm
 EA ./textures/eagle.xpm
 S ./textures/sprite_1.xpm
 
@@ -12,7 +12,7 @@ C 45,250,250
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 1
 1 0 0 1 0 0 1 0 1 1 0 1 0 0 0 0 0 1
-1 0 1 0 0 N 0 0 0 0 0 1 2 0 2 0 2 1
+1 0 1 0 0 W 0 0 0 0 0 1 2 0 2 0 2 1
 1 1 0 0 0 0 0 0 0 1 0 1 1 1 1 1 1 1
 1 0 1 0 1 0 1 0 1 0 0 1 1 1 1 1 1 1
 1 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1
