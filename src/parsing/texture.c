@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 18:11:03 by coscialp          #+#    #+#             */
-/*   Updated: 2020/03/12 19:41:14 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2020/03/12 20:44:37 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,6 @@ void	loading_all_tex(t_cub3d *c)
 	load_texture(c, data()->sprite_texture);
 	load_texture(c, "./textures/sprite_1.xpm");
 	load_texture(c, "./textures/sprite_1.xpm");
+	load_texture(c, "./wolf_texture/texture_1.xpm");
+	load_texture(c, "./wolf_texture/texture_2.xpm");
 }

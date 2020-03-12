@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 12:37:24 by coscialp          #+#    #+#             */
-/*   Updated: 2020/03/12 20:10:01 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2020/03/12 20:45:46 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,16 @@ int		main_loop(t_cub3d *c)
 		close_prgm(c);
 	}
 	parsing_sprite(c);
-	int i = 0;
-	while (i < data()->num_sprite)
-	{
-		if (c->sprite[i].type == 6)
-		{
-			c->sprite[i].x += -player()->dir.x * 0.05;
-			c->sprite[i].y += -player()->dir.y * 0.05;
-		}
-		i++;
-	}
+	// int i = 0;
+	// while (i < data()->num_sprite)
+	// {
+	// 	if (c->sprite[i].type == 6)
+	// 	{
+	// 		c->sprite[i].x += -player()->dir.x * 0.05;
+	// 		c->sprite[i].y += -player()->dir.y * 0.05;
+	// 	}
+	// 	i++;
+	// }
 	raycast(c);
 	draw_lifebar(c);
 	mlx_put_image_to_window(data()->ptrwin, data()->win, c->img.img, 0, 0);
