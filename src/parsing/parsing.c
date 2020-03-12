@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   parsing.c                                        .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/30 16:31:43 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/02 14:22:15 by coscialp    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/30 16:31:43 by coscialp          #+#    #+#             */
+/*   Updated: 2020/03/12 18:39:46 by coscialp         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
@@ -52,11 +52,12 @@ int				parsing_resolution(char *line, t_data *data)
 	return (1);
 }
 
-int				parsing_color(char *line, t_cub3d *c)
+int				parsing_color(char *line)
 {
 	char	**col;
 	int		i;
 	int		j;
+	t_color	color;
 
 	j = 0;
 	if (!(col = ft_split(line + 1, ',')))
@@ -72,11 +73,11 @@ int				parsing_color(char *line, t_cub3d *c)
 			return (ft_free_tab(col));
 		j++;
 	}
-	c->color.rgba.r = ft_atoi(col[0]);
-	c->color.rgba.g = ft_atoi(col[1]);
-	c->color.rgba.b = ft_atoi(col[2]);
-	c->data.col_ceil = line[0] == 'C' ? c->color.color : c->data.col_ceil;
-	c->data.col_floor = line[0] == 'F' ? c->color.color : c->data.col_floor;
+	color.rgba.r = ft_atoi(col[0]);
+	color.rgba.g = ft_atoi(col[1]);
+	color.rgba.b = ft_atoi(col[2]);
+	data()->col_ceil = line[0] == 'C' ? color.color : data()->col_ceil;
+	data()->col_floor = line[0] == 'F' ? color.color : data()->col_floor;
 	ft_free_tab(col);
 	return (1);
 }

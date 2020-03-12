@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   cub3d.h                                          .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 18:11:59 by coscialp    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/30 16:40:25 by coscialp          #+#    #+#             */
+/*   Updated: 2020/03/12 19:24:06 by coscialp         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -55,7 +55,6 @@ typedef struct	s_data
 	int				col_floor;
 	int				col_ceil;
 	int				num_sprite;
-	int				num_sprite2;
 	char			*north_texture;
 	char			*south_texture;
 	char			*west_texture;
@@ -125,30 +124,6 @@ typedef struct	s_image
 	int			*ptr;
 }				t_image;
 
-typedef struct	s_bpm
-{
-	unsigned char	bitmap_type[2];
-	int				file_size;
-	short			reserved1;
-	short			reserved2;
-	unsigned int	offset_bits;
-}				t_bpm;
-
-typedef struct	s_bpm2
-{
-	unsigned int	size_header;
-	unsigned int	width;
-	unsigned int	height;
-	short int		planes;
-	short int		bit_count;
-	unsigned int	compression;
-	unsigned int	image_size;
-	unsigned int	ppm_x;
-	unsigned int	ppm_y;
-	unsigned int	clr_used;
-	unsigned int	clr_important;
-}				t_bpm2;
-
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 **┃								struct player                                 ┃
@@ -165,11 +140,10 @@ typedef struct	s_player
 
 typedef struct	s_sprite
 {
-	int			type;
-	double		x;
-	double		y;
-	double		dist;
-	t_image		tex;
+	int				type;
+	double			x;
+	double			y;
+	double			dist;
 }				t_sprite;
 
 /*
@@ -182,7 +156,6 @@ typedef struct	s_cub3d
 {
 	char		move;
 	char		move_lat;
-	char		move_y;
 	char		rotate;
 	int			map_x;
 	int			map_y;
@@ -196,8 +169,6 @@ typedef struct	s_cub3d
 	int			tex_x;
 	int			tex_y;
 	int			direction;
-	int			sneak;
-	int			move_cam;
 	int			sprite_screen;
 	int			sprite_height;
 	int			sprite_width;
@@ -218,13 +189,8 @@ typedef struct	s_cub3d
 	t_vector	side_dist;
 	t_vector	delta_dist;
 	t_vector	sprite_pos;
-	t_data		data;
-	t_map		map;
-	t_color		color;
-	t_player	player;
 	t_image		img;
 	t_image		tex[9];
-	t_image		weapons[2];
 	t_sprite	*sprite;
 }				t_cub3d;
 
@@ -239,14 +205,14 @@ void			load_tex_sprite(t_cub3d *c);
 void			parsing_core(t_cub3d *c);
 int				parsing_texture(char *current_line, size_t i, t_data *data);
 int				parsing_resolution(char *line, t_data *data);
-int				parsing_analyser(char *line, t_cub3d *c);
-int				parsing_color(char *line, t_cub3d *c);
+int				parsing_analyser(char *line);
+int				parsing_color(char *line);
 int				parsing_name(char *name);
 int				parsing_sprite(t_cub3d *c);
 int				map_dimension(t_map *map);
 int				read_map(int fd, t_map *map, char *current_line);
-int				parsing_map(t_cub3d *c);
-int				check_map(t_map *map, int i, int j, t_cub3d *c);
+int				parsing_map(void);
+int				check_map(t_map *map, int i, int j);
 int				texture_is_valid(char *path);
 
 /*
@@ -256,7 +222,7 @@ int				texture_is_valid(char *path);
 */
 
 void			ft_exit(t_cub3d *c);
-void			print_params(t_cub3d *c);
+void			print_params(void);
 int				secu_initialize(char **map_1d, int fd);
 int				msg_error(char *reason);
 t_bool			ft_isargb(unsigned char color);
@@ -269,11 +235,14 @@ t_bool			ft_ispos(char pos);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-void			ft_free_struct(t_data data);
+void			ft_free_struct(void);
 t_cub3d			*init_cub3d(char *file);
-t_data			init_data(char *file);
+void			init_data(char *file);
 t_map			init_map(void);
 t_color			init_color(void);
+t_data			*data(void);
+t_map			*map(void);
+t_player		*player(void);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -282,7 +251,7 @@ t_color			init_color(void);
 */
 
 void			ft_exit_sucess(t_cub3d *c);
-void			destroy_wall(t_cub3d *c);
+void			destroy_wall(void);
 void			draw_hud(t_cub3d *c);
 void			draw_weapons(t_cub3d *c, int i);
 void			draw_sprite(t_cub3d *c, int i);
@@ -297,8 +266,8 @@ void			icanmove_y_lat(t_cub3d *c, char orientation);
 void			icanmove_x_lat(t_cub3d *c, char orientation);
 void			icanmove_y(t_cub3d *c, char orientation);
 void			icanmove_x(t_cub3d *c, char orientation);
-void			itsanobject_ud(t_cub3d *c, char orientation);
-void			itsanobject_rd(t_cub3d *c, char orientation);
+void			itsanobject_ud(char orientation);
+void			itsanobject_rd(char orientation);
 void			save_bitmap(const char *filename, t_cub3d *c);
 
 /*

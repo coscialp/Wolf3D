@@ -1,68 +1,67 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/12/02 12:37:24 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/15 11:28:08 by coscialp    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/02 12:37:24 by coscialp          #+#    #+#             */
+/*   Updated: 2020/03/12 20:10:01 by coscialp         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
 void	init_windows(t_cub3d *c)
 {
-	if (!(c->data.ptrwin = mlx_init()))
+	if (!(data()->ptrwin = mlx_init()))
 		ft_exit(c);
-	if (!(c->data.win = mlx_new_window(c->data.ptrwin,
-	c->data.res_x, c->data.res_y, "Cub3D")))
+	if (!(data()->win = mlx_new_window(data()->ptrwin,
+	data()->res_x, data()->res_y, "Cub3D")))
 		ft_exit(c);
-	c->img.img = mlx_new_image(c->data.ptrwin,
-	c->data.res_x, c->data.res_y);
+	c->img.img = mlx_new_image(data()->ptrwin,
+	data()->res_x, data()->res_y);
 	c->img.ptr = (int *)mlx_get_data_addr(c->img.img, &c->img.bpp,
 	&c->img.size_line, &c->img.endian);
 	loading_all_tex(c);
-	c->move_cam = 0;
 	c->sprite = malloc(sizeof(t_sprite));
-	if (!(c->zbuffer = malloc(sizeof(double) * c->data.res_x)))
+	if (!(c->zbuffer = malloc(sizeof(double) * data()->res_x)))
 		ft_exit(c);
 }
 
 void	ft_exit_sucess(t_cub3d *c)
 {
-	close(c->data.fd);
-	ft_free_struct(c->data);
+	close(data()->fd);
 	free(c->sprite);
 	free(c->zbuffer);
-	ft_free_tab(c->map.map_2d);
+	ft_free_struct();
+	ft_free_tab(map()->map_2d);
 	free(c);
 	exit(EXIT_SUCCESS);
 }
 
 void	init_plane(t_cub3d *c)
 {
-	if (c->map.compass == 'W')
+	if (map()->compass == 'W')
 	{
-		c->data.plane.x = -0.66;
-		c->data.plane.y = 0;
+		data()->plane.x = -0.66;
+		data()->plane.y = 0;
 	}
-	else if (c->map.compass == 'E')
+	else if (map()->compass == 'E')
 	{
-		c->data.plane.x = 0.66;
-		c->data.plane.y = 0;
+		data()->plane.x = 0.66;
+		data()->plane.y = 0;
 	}
-	else if (c->map.compass == 'N')
+	else if (map()->compass == 'N')
 	{
-		c->data.plane.x = 0;
-		c->data.plane.y = 0.66;
+		data()->plane.x = 0;
+		data()->plane.y = 0.66;
 	}
-	else if (c->map.compass == 'S')
+	else if (map()->compass == 'S')
 	{
-		c->data.plane.x = 0;
-		c->data.plane.y = -0.66;
+		data()->plane.x = 0;
+		data()->plane.y = -0.66;
 	}
 	c->movspeed = 0.075;
 	c->rotspeed = 0.04;
@@ -77,21 +76,49 @@ int		main_loop(t_cub3d *c)
 		rotate(c, c->rotate);
 	if (c->move_lat)
 		move_lat_camera(c, c->move_lat);
-	if (c->move_y)
-		move_y_camera(c, c->move_y);
-	if (c->player.life > 100)
-		c->player.life = 100;
-	else if (c->player.life <= 0)
+	if (player()->life > 100)
+		player()->life = 100;
+	if (player()->life <= 0)
 	{
 		ft_dprintf(1, "You are DEAD !\n");
 		close_prgm(c);
 	}
 	parsing_sprite(c);
+	int i = 0;
+	while (i < data()->num_sprite)
+	{
+		if (c->sprite[i].type == 6)
+		{
+			c->sprite[i].x += -player()->dir.x * 0.05;
+			c->sprite[i].y += -player()->dir.y * 0.05;
+		}
+		i++;
+	}
 	raycast(c);
-	if (c->data.res_x >= 800 && c->data.res_y >= 600)
-		draw_hud(c);
-	mlx_put_image_to_window(c->data.ptrwin, c->data.win, c->img.img, 0, 0);
+	draw_lifebar(c);
+	mlx_put_image_to_window(data()->ptrwin, data()->win, c->img.img, 0, 0);
 	return (0);
+}
+
+t_data	*data(void)
+{
+	static t_data	data = {0};
+
+	return (&data);
+}
+
+t_map	*map(void)
+{
+	static t_map	map = {0};
+
+	return (&map);
+}
+
+t_player	*player(void)
+{
+	static t_player	player = {{0}, 0, 0, 0};
+
+	return (&player);
 }
 
 int		main(int ac, char **av)
@@ -105,20 +132,14 @@ int		main(int ac, char **av)
 			ft_exit(c);
 		parsing_core(c);
 		if (ac == 3 && !ft_strcmp(av[ac - 1], "-display"))
-			print_params(c);
+			print_params();
 		init_plane(c);
-		if (ac == 3 && !ft_strcmp(av[ac - 1], "-save"))
-		{
-			parsing_sprite(c);
-			raycast(c);
-			save_bitmap("save.bmp", c);
-			close_prgm(c);
-		}
-		mlx_hook(c->data.win, 2, 0, &key_press, c);
-		mlx_hook(c->data.win, 3, 0, &key_release, c);
-		mlx_hook(c->data.win, 17, 0, &close_prgm, c);
-		mlx_loop_hook(c->data.ptrwin, &main_loop, c);
-		mlx_loop(c->data.ptrwin);
+		mlx_hook(data()->win, 2, 0, &key_press, c);
+		mlx_hook(data()->win, 3, 0, &key_release, c);
+		mlx_hook(data()->win, 17, 0, &close_prgm, c);
+		mlx_loop_hook(data()->ptrwin, &main_loop, c);
+		mlx_loop(data()->ptrwin);
+		return (0);
 	}
 	return (msg_error("argument"));
 }

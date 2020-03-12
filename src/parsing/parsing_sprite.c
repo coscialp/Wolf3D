@@ -1,48 +1,51 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   parsing_sprite.c                                 .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/06 13:08:23 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 18:17:07 by coscialp    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_sprite.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 13:08:23 by coscialp          #+#    #+#             */
+/*   Updated: 2020/03/12 19:59:07 by coscialp         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
 static void		sprite_parser(t_cub3d *c, int i, int j, int *x)
 {
-	if (c->map.map_2d[i][j] == '2' || c->map.map_2d[i][j] == '3' ||
-	c->map.map_2d[i][j] == '4')
+	if (map()->map_2d[i][j] == '2' || map()->map_2d[i][j] == '3' ||
+	map()->map_2d[i][j] == '4')
 	{
 		c->sprite[(*x)].x = i + 0.5;
 		c->sprite[(*x)].y = j + 0.5;
-		c->sprite[(*x)].type = c->map.map_2d[i][j] - 44;
+		c->sprite[(*x)].type = map()->map_2d[i][j] - 46;
 		*x += 1;
 	}
 }
 
-static void		check_sprite(t_cub3d *c)
+static int		check_sprite(void)
 {
 	int			i;
 	int			j;
+	int			ret;
 
 	i = 0;
-	while (c->map.map_2d[i])
+	ret = 0;
+	while (map()->map_2d[i])
 	{
 		j = 0;
-		while (c->map.map_2d[i][j])
+		while (map()->map_2d[i][j])
 		{
-			if (c->map.map_2d[i][j] == '2' || c->map.map_2d[i][j] == '3'
-			|| c->map.map_2d[i][j] == '4')
-				c->data.num_sprite += 1;
+			if (map()->map_2d[i][j] == '2' || map()->map_2d[i][j] == '3'
+			|| map()->map_2d[i][j] == '4')
+				ret += 1;
 			j++;
 		}
 		i++;
 	}
+	return (ret);
 }
 
 int				parsing_sprite(t_cub3d *c)
@@ -53,16 +56,18 @@ int				parsing_sprite(t_cub3d *c)
 
 	i = 0;
 	x = 0;
+	i = check_sprite();
+	if (i == data()->num_sprite)
+		return (0);
 	free(c->sprite);
-	c->data.num_sprite = 0;
-	check_sprite(c);
+	data()->num_sprite = i;
 	i = 0;
-	if (!(c->sprite = ft_memalloc(sizeof(t_sprite) * c->data.num_sprite)))
+	if (!(c->sprite = ft_memalloc(sizeof(t_sprite) * data()->num_sprite)))
 		ft_exit(c);
-	while (c->map.map_2d[i])
+	while (map()->map_2d[i])
 	{
 		j = 0;
-		while (c->map.map_2d[i][j])
+		while (map()->map_2d[i][j])
 		{
 			sprite_parser(c, i, j, &x);
 			j++;

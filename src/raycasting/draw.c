@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   draw.c                                           .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/02 11:48:31 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 11:58:43 by coscialp    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/02 11:48:31 by coscialp          #+#    #+#             */
+/*   Updated: 2020/03/12 19:17:54 by coscialp         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
@@ -36,7 +36,7 @@ void	draw_wall(t_cub3d *c, int x)
 		color.rgba.r *= coef;
 		color.rgba.g *= coef;
 		color.rgba.b *= coef;
-		c->img.ptr[y * c->data.res_x + x] = color.color;
+		c->img.ptr[y * data()->res_x + x] = color.color;
 		y++;
 	}
 }
@@ -48,16 +48,16 @@ void	draw_floor(t_cub3d *c, int x)
 	double	coef;
 	t_color	color;
 
-	y = c->data.res_y - 1;
+	y = data()->res_y - 1;
 	while (y >= c->draw_end)
 	{
-		dist = y - ((c->data.res_y / 2) + c->move_cam);
+		dist = y - ((data()->res_y / 2));
 		coef = dist < 300 ? (double)dist / 300.0 : 1.0;
-		color.color = c->data.col_floor;
+		color.color = data()->col_floor;
 		color.rgba.r *= coef;
 		color.rgba.g *= coef;
 		color.rgba.b *= coef;
-		c->img.ptr[y * c->data.res_x + x] = color.color;
+		c->img.ptr[y * data()->res_x + x] = color.color;
 		y--;
 	}
 }
@@ -72,13 +72,13 @@ void	draw_ceilling(t_cub3d *c, int x)
 	y = 0;
 	while (y < c->draw_start)
 	{
-		dist = (c->data.res_y / 2) + c->move_cam - y;
+		dist = (data()->res_y / 2) - y;
 		coef = dist < 300 ? (double)dist / 300.0 : 1.0;
-		color.color = c->data.col_ceil;
+		color.color = data()->col_ceil;
 		color.rgba.r *= coef;
 		color.rgba.g *= coef;
 		color.rgba.b *= coef;
-		c->img.ptr[y * c->data.res_x + x] = color.color;
+		c->img.ptr[y * data()->res_x + x] = color.color;
 		y++;
 	}
 }

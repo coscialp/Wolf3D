@@ -1,15 +1,15 @@
 # **************************************************************************** #
-#                                                           LE - /             #
-#                                                               /              #
-#    Makefile                                         .::    .:/ .      .::    #
-#                                                  +:+:+   +:    +:  +:+:+     #
-#    By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+      #
-#                                                  #+#   #+    #+    #+#       #
-#    Created: 2019/12/09 15:43:33 by coscialp     #+#   ##    ##    #+#        #
-#    Updated: 2020/01/13 17:11:26 by coscialp    ###    #+. /#+    ###.fr      #
-#                                                          /                   #
-#                                                         /                    #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/12/09 15:43:33 by coscialp          #+#    #+#              #
+#    Updated: 2020/03/12 19:36:37 by coscialp         ###   ########lyon.fr    #
+#                                                                              #
 # **************************************************************************** #
+
 
 .PHONY:			all clean fclean re bonus git norm
 
@@ -66,11 +66,10 @@ EINC_NAME = cub3d.h
 ESRC_NAME = error.c print.c exit.c
 
 EVINC_NAME = cub3d.h
-EVSRC_NAME = key_event.c other_event.c move.c icanmove.c save.c itsanobject.c
+EVSRC_NAME = key_event.c other_event.c move.c icanmove.c itsanobject.c
 
 RINC_NAME = cub3d.h
-RSRC_NAME = raycast.c draw.c draw_sprite.c raycast_sprite.c draw_hud.c\
-			draw_lifebar.c
+RSRC_NAME = raycast.c draw.c draw_sprite.c raycast_sprite.c draw_lifebar.c
 
 SINC_NAME = cub3d.h
 SSRC_NAME = handler_struct.c
@@ -131,7 +130,7 @@ $(MLX):
 	@make -C ./minilibx/ 2> /dev/null
 
 $(NAME): $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) $(LIBFT) $(MLX) $(EVOBJ) $(ROBJ)
-	@gcc $(FLAG) $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) $(EVOBJ) $(ROBJ) -o $(NAME) $(MLXFLAG) $(LIB_PATH)libft.a
+	@gcc $(FLAGS) $(SOBJ) $(MOBJ) $(POBJ) $(EOBJ) $(EVOBJ) $(ROBJ) -o $(NAME) $(MLXFLAG) $(LIB_PATH)libft.a
 	@echo "	\033[2K\r$(DARK_BLUE)Cub3d:	$(LIGHT_GREEN)Updated\033[0m"
 
 $(POBJ_PATH)%.o: $(PSRC_PATH)%.c $(PINC)

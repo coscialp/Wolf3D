@@ -1,70 +1,70 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   itsanobject.c                                    .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/09 11:33:21 by coscialp     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 11:40:57 by coscialp    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   itsanobject.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 11:33:21 by coscialp          #+#    #+#             */
+/*   Updated: 2020/03/12 19:13:15 by coscialp         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
-void	itsanobject_ud(t_cub3d *c, char orientation)
+void	itsanobject_ud(char orientation)
 {
-	if (c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] ==
+	if (map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] ==
 	'2' && orientation == 'U')
 	{
-		c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] = '0';
-		c->player.life += 10;
+		map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] = '0';
+		player()->life += 10;
 	}
-	else if (c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] ==
+	else if (map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] ==
 	'2' && orientation == 'D')
 	{
-		c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] = '0';
-		c->player.life += 10;
+		map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] = '0';
+		player()->life += 10;
 	}
-	if (c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] ==
+	if (map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] ==
 	'3' && orientation == 'U')
 	{
-		c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] = '0';
-		c->player.life -= 10;
+		map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] = '0';
+		player()->life -= 10;
 	}
-	else if (c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] ==
+	else if (map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] ==
 	'3' && orientation == 'D')
 	{
-		c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] = '0';
-		c->player.life -= 10;
+		map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] = '0';
+		player()->life -= 10;
 	}
 }
 
-void	itsanobject_rd(t_cub3d *c, char orientation)
+void	itsanobject_rd(char orientation)
 {
-	if (c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] ==
+	if (map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] ==
 	'2' && orientation == 'R')
 	{
-		c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] = '0';
-		c->player.life += 10;
+		map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] = '0';
+		player()->life += 10;
 	}
-	else if (c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] ==
+	else if (map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] ==
 	'2' && orientation == 'L')
 	{
-		c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] = '0';
-		c->player.life += 10;
+		map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] = '0';
+		player()->life += 10;
 	}
-	if (c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] ==
+	if (map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] ==
 	'3' && orientation == 'R')
 	{
-		c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] = '0';
-		c->player.life -= 10;
+		map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] = '0';
+		player()->life -= 10;
 	}
-	else if (c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] ==
+	else if (map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] ==
 	'3' && orientation == 'L')
 	{
-		c->map.map_2d[(int)c->player.pos_x][(int)c->player.pos_y] = '0';
-		c->player.life -= 10;
+		map()->map_2d[(int)player()->pos_x][(int)player()->pos_y] = '0';
+		player()->life -= 10;
 	}
 }
