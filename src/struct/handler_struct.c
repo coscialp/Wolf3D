@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   handler_struct.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/02 12:30:07 by coscialp          #+#    #+#             */
-/*   Updated: 2020/03/12 19:05:08 by coscialp         ###   ########lyon.fr   */
-/*                                                                            */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   handler_struct.c                                 .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2019/12/02 12:30:07 by coscialp     #+#   ##    ##    #+#       */
+/*   Updated: 2020/03/17 21:55:52 by coscialp    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
 /* ************************************************************************** */
-
 
 #include "cub3d.h"
 
@@ -25,7 +25,7 @@ t_cub3d		*init_cub3d(char *file)
 	init_data(file);
 	map()->start_pos_x = -1;
 	map()->start_pos_y = -1;
-	player()->life = 50;
+	player()->life = 100;
 	return (c);
 }
 

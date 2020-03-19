@@ -1,19 +1,19 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   raycast_sprite.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/06 13:10:17 by coscialp          #+#    #+#             */
-/*   Updated: 2020/03/12 19:55:24 by coscialp         ###   ########lyon.fr   */
-/*                                                                            */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   raycast_sprite.c                                 .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2020/01/06 13:10:17 by coscialp     #+#   ##    ##    #+#       */
+/*   Updated: 2020/03/18 17:42:06 by coscialp    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
 /* ************************************************************************** */
-
 
 #include "cub3d.h"
 
-static void	sort_sprite(t_cub3d *c)
+void	sort_sprite(t_cub3d *c)
 {
 	int			i;
 	t_sprite	dbuf;
@@ -32,10 +32,10 @@ static void	sort_sprite(t_cub3d *c)
 	}
 }
 
-static void	math_sprite(t_cub3d *c, int i)
+void	math_sprite(t_cub3d *c, t_sprite near)
 {
-	c->sprite_pos.x = c->sprite[i].x - player()->pos_x;
-	c->sprite_pos.y = c->sprite[i].y - player()->pos_y;
+	c->sprite_pos.x = near.x - player()->pos_x;
+	c->sprite_pos.y = near.y - player()->pos_y;
 	c->inv_correc = 1.0 / ((data()->plane.x * player()->dir.y)
 	- (player()->dir.x * data()->plane.y));
 	c->transform.x = c->inv_correc * ((player()->dir.y * c->sprite_pos.x)
@@ -57,34 +57,55 @@ static void	math_sprite(t_cub3d *c, int i)
 
 int			sprite_casting(t_cub3d *c)
 {
-	int	i;
+	int			i;
 
 	i = 0;
 	while (i < data()->num_sprite)
 	{
-		c->sprite[i].dist = (player()->pos_x - c->sprite[i].x) *
-		(player()->pos_x - c->sprite[i].x) +
-		(player()->pos_y - c->sprite[i].y) * (player()->pos_y - c->sprite[i].y);
+		if (c->sprite[i].type == EMPTY)
+			c->sprite[i].dist = 999.0;
+		else
+			c->sprite[i].dist = (player()->pos_x - c->sprite[i].x) *
+			(player()->pos_x - c->sprite[i].x) +
+			(player()->pos_y - c->sprite[i].y) * (player()->pos_y - c->sprite[i].y);
 		i++;
 	}
+	i--;
+	c->size_near = 0;
 	sort_sprite(c);
-	i = -1;
-	while (++i < data()->num_sprite)
+	while (i >= 0 && c->size_near < 10)
 	{
-		math_sprite(c, i);
+		if (c->sprite[i].type == EMPTY)
+			break ;
+		else
+			c->near[c->size_near] = c->sprite[i];
+		i--;
+		c->size_near++;
+	}
+	i = c->size_near - 1;
+	while (i >= 0)
+	{
+		math_sprite(c, c->near[i]);
 		c->sprite_start.x = -c->sprite_width / 2 + c->sprite_screen;
 		if (c->sprite_start.x < 0)
 			c->sprite_start.x = 0;
 		c->sprite_end.x = c->sprite_width / 2 + c->sprite_screen;
 		if (c->sprite_end.x >= data()->res_x)
 			c->sprite_end.x = data()->res_x - 1;
-		draw_sprite(c, c->sprite[i].type);
+		draw_sprite(c, c->near[i].type);
+		i--;
 	}
 	return (0);
 }
 
 int			wall_orientation(t_vector ray, t_cub3d *c)
 {
+	if (c->hit == 2)
+		return (DOOR_BLUE);
+	if ( c->hit == 'a' - 51)
+		return (SECRET);
+	if (c->hit > 2)
+		return (DOOR_OPEN + c->hit - 2);
 	if (c->side)
 		return (ray.y < 0 ? 2 : 3);
 	return (ray.x < 0 ? 1 : 0);

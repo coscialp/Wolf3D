@@ -12,6 +12,8 @@
         "types.h": "c",
         "libft.h": "c",
         "libftprintf.h": "c",
-        "key.h": "c"
+        "key.h": "c",
+        "math.h": "c",
+        "stat.h": "c"
     }
 }

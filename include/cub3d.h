@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/30 16:40:25 by coscialp          #+#    #+#             */
-/*   Updated: 2020/03/12 19:24:06 by coscialp         ###   ########lyon.fr   */
-/*                                                                            */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   cub3d.h                                          .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2019/11/30 16:40:25 by coscialp     #+#   ##    ##    #+#       */
+/*   Updated: 2020/03/18 17:41:57 by coscialp    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
 /* ************************************************************************** */
-
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -22,6 +22,44 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+
+# define NORTH 0
+# define SOUTH 1
+# define EAST 2
+# define WEST 3
+# define HEALTH 4
+# define SPRITE 5
+# define ENNEMIES_WAIT 6
+# define GUN 7
+# define GUN_SHOOT 8
+# define GUN_AFTER 9
+# define ENNEMIES_BLESSED 10
+# define ENNEMIES_BLESSED2 11
+# define ENNEMIES_BLESSED3 12
+# define ENNEMIES_DEAD 13
+# define EMPTY 14
+# define ENNEMIES_RUN 15
+# define ENNEMIES_RUN2 16
+# define ENNEMIES_RUN3 17
+# define ENNEMIES_RUN4 18
+# define ENNEMIES_START 19
+# define ENNEMIES_SHOOT 20
+# define DOOR_BLUE 21
+# define KNIFE 22
+# define KNIFE_ATTACK 23
+# define KNIFE_ATTACK2 24
+# define KNIFE_ATTACK3 25
+# define DOOR_OPEN 26
+# define DOOR_OPEN2 27
+# define DOOR_OPEN3 28
+# define DOOR_OPEN4 29
+# define DOOR_OPEN5 30
+# define DOOR_OPEN6 31
+# define DOOR_OPEN7 32
+# define DOOR_OPEN8 33
+# define DOOR_OPEN9 34
+# define BULLET 35
+# define SECRET 36
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -134,12 +172,18 @@ typedef struct	s_player
 {
 	t_vector	dir;
 	int			life;
+	double		stamina;
 	double		pos_x;
 	double		pos_y;
+	char		shoot;
+	short		weapons;
+	short		scope;
+	short		bullet;
 }				t_player;
 
 typedef struct	s_sprite
 {
+	int				frame;
 	int				type;
 	double			x;
 	double			y;
@@ -154,9 +198,11 @@ typedef struct	s_sprite
 
 typedef struct	s_cub3d
 {
+	char		shoot;
 	char		move;
 	char		move_lat;
 	char		rotate;
+	char		action;
 	int			map_x;
 	int			map_y;
 	int			step_x;
@@ -190,8 +236,10 @@ typedef struct	s_cub3d
 	t_vector	delta_dist;
 	t_vector	sprite_pos;
 	t_image		img;
-	t_image		tex[9];
-	t_sprite	*sprite;
+	t_image		tex[255];
+	t_sprite	sprite[255];
+	t_sprite	near[10];
+	int			size_near;
 }				t_cub3d;
 
 /*
@@ -250,14 +298,19 @@ t_player		*player(void);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
+char			is_wall(char **map, int i, int j);
 void			ft_exit_sucess(t_cub3d *c);
 void			destroy_wall(void);
 void			draw_hud(t_cub3d *c);
+void			draw_arms(t_cub3d *c, int weapons);
 void			draw_weapons(t_cub3d *c, int i);
 void			draw_sprite(t_cub3d *c, int i);
+void			draw_staminabar(t_cub3d *c);
 int				close_prgm(t_cub3d *c);
 int				key_press(int keycode, t_cub3d *c);
 int				key_release(int keycode, t_cub3d *c);
+int 			no_object(t_cub3d *c);
+void			change_dist_sprite(t_cub3d *c);
 void			rotate(t_cub3d *c, char rotate);
 void			move_camera(t_cub3d *c, char orientation);
 void			move_y_camera(t_cub3d *c, char orientation);
@@ -284,5 +337,6 @@ void			draw(t_cub3d *c, int x);
 void			draw_lifebar(t_cub3d *c);
 void			raycast_sprite(t_cub3d *c);
 void			raycast_sprite2(t_cub3d *c);
+void			second_raycast(t_cub3d *c);
 
 #endif

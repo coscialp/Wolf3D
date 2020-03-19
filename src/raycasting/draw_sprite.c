@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   draw_sprite.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 11:45:43 by coscialp          #+#    #+#             */
-/*   Updated: 2020/03/12 19:18:09 by coscialp         ###   ########lyon.fr   */
-/*                                                                            */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   draw_sprite.c                                    .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2020/01/09 11:45:43 by coscialp     #+#   ##    ##    #+#       */
+/*   Updated: 2020/03/17 00:16:50 by coscialp    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
 /* ************************************************************************** */
-
 
 #include "cub3d.h"
 
@@ -17,7 +17,7 @@ void	draw_pixel_sprite(t_cub3d *c, t_pos tex, int y, int i)
 {
 	t_color color;
 	double	coef;
-	int		d;
+	size_t		d;
 
 	d = y * 256 - data()->res_y *
 	128 + c->sprite_height * 128;

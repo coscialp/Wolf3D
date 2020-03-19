@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   key_event.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.le-101.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/11 10:52:05 by coscialp          #+#    #+#             */
-/*   Updated: 2020/03/12 18:44:09 by coscialp         ###   ########lyon.fr   */
-/*                                                                            */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   key_event.c                                      .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: coscialp <coscialp@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2019/12/11 10:52:05 by coscialp     #+#   ##    ##    #+#       */
+/*   Updated: 2020/03/17 22:26:44 by coscialp    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
 /* ************************************************************************** */
-
 
 #include "cub3d.h"
 
@@ -32,7 +32,7 @@ int		key_press(int keycode, t_cub3d *c)
 		c->rotate = 'L';
 	else if (keycode == RIGHT)
 		c->rotate = 'R';
-	else if (keycode == SHIFT)
+	else if (keycode == SHIFT && player()->stamina != 0)
 		c->movspeed = 0.15;
 	return (1);
 }
@@ -53,5 +53,21 @@ int		key_release(int keycode, t_cub3d *c)
 		c->rotate = 0;
 	else if (keycode == SHIFT)
 		c->movspeed = 0.075;
+	else if (keycode == SPACE && player()->shoot == 0)
+		c->shoot = 1;
+	else if (keycode == E)
+		c->action = 1;
+	else if (keycode == KEY_1)
+	{
+		player()->weapons = GUN;
+		player()->scope = 40;
+	}
+	else if (keycode == KEY_2)
+	{
+		player()->weapons = KNIFE;
+		player()->scope = 1;
+	}
+	// else
+	// 	dprintf(2, "keycode:%d\n", keycode);
 	return (1);
 }
